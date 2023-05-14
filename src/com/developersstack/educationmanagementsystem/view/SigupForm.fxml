@@ -12,48 +12,48 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.educationmanagementsystem.controller.SigupFormController">
    <children>
-      <ImageView fitHeight="369.0" fitWidth="376.0" layoutX="234.0" layoutY="31.0" pickOnBounds="true">
+      <ImageView fitHeight="369.0" fitWidth="303.0" layoutY="21.0" pickOnBounds="true">
          <image>
             <Image url="@../assets/sign-up.png" />
          </image>
       </ImageView>
-      <Label layoutX="37.0" layoutY="55.0" text="Sign up">
+      <Label layoutX="294.0" layoutY="55.0" text="Sign up">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Separator layoutX="37.0" layoutY="126.0" prefHeight="3.0" prefWidth="291.0" />
-      <TextField layoutX="37.0" layoutY="148.0" prefHeight="30.0" prefWidth="141.0" promptText="First Name">
+      <Separator layoutX="300.0" layoutY="126.0" prefHeight="3.0" prefWidth="291.0" />
+      <TextField layoutX="294.0" layoutY="148.0" prefHeight="30.0" prefWidth="141.0" promptText="First Name">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <PasswordField layoutX="35.0" layoutY="235.0" prefHeight="25.0" prefWidth="291.0" promptText="Password">
+      <PasswordField layoutX="292.0" layoutY="235.0" prefHeight="25.0" prefWidth="291.0" promptText="Password">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </PasswordField>
-      <Button layoutX="37.0" layoutY="345.0" mnemonicParsing="false" style="-fx-background-color: #0000ff;" text="Already have an account" textFill="WHITE">
+      <Button layoutX="294.0" layoutY="345.0" mnemonicParsing="false" style="-fx-background-color: #0000ff;" text="Already have an account" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="247.0" layoutY="345.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" style="-fx-background-color: #00cc00;" text="Sign up" textFill="#f5f5f5">
+      <Button layoutX="504.0" layoutY="345.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" style="-fx-background-color: #00cc00;" text="Sign up" textFill="#f5f5f5">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <TextField layoutX="187.0" layoutY="148.0" prefHeight="30.0" prefWidth="141.0" promptText="Last Name">
+      <TextField layoutX="444.0" layoutY="148.0" prefHeight="30.0" prefWidth="141.0" promptText="Last Name">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="35.0" layoutY="190.0" prefHeight="30.0" prefWidth="291.0" promptText="e-mail">
+      <TextField layoutX="292.0" layoutY="190.0" prefHeight="30.0" prefWidth="291.0" promptText="e-mail">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <PasswordField layoutX="35.0" layoutY="277.0" prefHeight="25.0" prefWidth="291.0" promptText="Conform Password">
+      <PasswordField layoutX="292.0" layoutY="277.0" prefHeight="25.0" prefWidth="291.0" promptText="Conform Password">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
