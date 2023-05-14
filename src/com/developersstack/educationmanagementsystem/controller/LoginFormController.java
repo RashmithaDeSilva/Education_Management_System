@@ -18,14 +18,19 @@ public class LoginFormController {
     public PasswordField txtPassword;
 
     public void createAccountOnAction(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/SignupForm.fxml")));
-        Stage stage = (Stage) contextLoginForm.getScene().getWindow();
-        stage.setScene(new Scene(parent));
+        setUI("../view/SignupForm.fxml");
     }
 
     public void forgotPasswordOnAction(ActionEvent actionEvent) {
     }
 
     public void loginOnAction(ActionEvent actionEvent) {
+    }
+
+    private void setUI(String location) throws IOException {
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(location)));
+        Stage stage = (Stage) contextLoginForm.getScene().getWindow();
+        stage.setScene(new Scene(parent));
+        stage.centerOnScreen();
     }
 }

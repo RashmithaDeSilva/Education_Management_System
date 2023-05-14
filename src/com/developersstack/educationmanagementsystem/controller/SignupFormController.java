@@ -21,11 +21,16 @@ public class SignupFormController {
     public PasswordField txtConformPassword;
 
     public void alreadyHaveAnAccountOnAction(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/LoginForm.fxml")));
-        Stage stage = (Stage) contextSignupForm.getScene().getWindow();
-        stage.setScene(new Scene(parent));
+        setUI("../view/LoginForm.fxml");
     }
 
     public void signupOnAction(ActionEvent actionEvent) {
+    }
+
+    private void setUI(String location) throws IOException {
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(location)));
+        Stage stage = (Stage) contextSignupForm.getScene().getWindow();
+        stage.setScene(new Scene(parent));
+        stage.centerOnScreen();
     }
 }
