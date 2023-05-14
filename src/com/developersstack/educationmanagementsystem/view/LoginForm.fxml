@@ -25,17 +25,17 @@
          </font>
       </Label>
       <Separator layoutX="27.0" layoutY="116.0" prefHeight="3.0" prefWidth="291.0" />
-      <TextField layoutX="27.0" layoutY="153.0" prefHeight="25.0" prefWidth="291.0" promptText="email">
+      <TextField layoutX="27.0" layoutY="153.0" prefHeight="25.0" prefWidth="291.0" promptText="e-mail">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <PasswordField layoutX="27.0" layoutY="200.0" prefHeight="25.0" prefWidth="291.0" promptText="password">
+      <PasswordField layoutX="27.0" layoutY="200.0" prefHeight="25.0" prefWidth="291.0" promptText="Password">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </PasswordField>
-      <Hyperlink layoutX="29.0" layoutY="260.0" text="Forgot pasword ?" underline="true">
+      <Hyperlink layoutX="29.0" layoutY="260.0" text="Forgot password ?" underline="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
