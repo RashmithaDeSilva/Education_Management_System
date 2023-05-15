@@ -34,9 +34,10 @@ public class LoginFormController {
         String password = txtPassword.getText();
 
         if (db.checkUserLogingInfomation(email, password)) {
-            new Alert(Alert.AlertType.CONFIRMATION).show();
+            //new Alert(Alert.AlertType.CONFIRMATION).show();
+
         } else {
-            new Alert(Alert.AlertType.ERROR ).show();
+            new Alert(Alert.AlertType.ERROR, "Wrong email or password").show();
         }
     }
 

@@ -40,7 +40,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Hyperlink>
-      <Button layoutX="261.0" layoutY="259.0" mnemonicParsing="false" onAction="#loginOnAction" style="-fx-background-color: #0000ff;" text="Login" textFill="WHITE">
+      <Button layoutX="29.0" layoutY="307.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="30.0" prefWidth="291.0" style="-fx-background-color: #0000ff;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="27.0" layoutY="306.0" mnemonicParsing="false" onAction="#createAccountOnAction" prefHeight="25.0" prefWidth="291.0" style="-fx-background-color: #00cc00;" text="Create an account" textFill="#f5f5f5">
+      <Button layoutX="173.0" layoutY="259.0" mnemonicParsing="false" onAction="#createAccountOnAction" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: #00cc00;" text="Create an account" textFill="#f5f5f5">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

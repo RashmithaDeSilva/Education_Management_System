@@ -20,6 +20,7 @@ public class AppInitializer extends Application {
                 (Objects.requireNonNull(getClass().getResource("./view/LoginForm.fxml")))
         ));
         primaryStage.centerOnScreen();
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }

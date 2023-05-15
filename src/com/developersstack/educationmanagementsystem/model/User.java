@@ -25,9 +25,7 @@ public class User {
     public String getLastName() {
         return lastName;
     }
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() {return email;}
     public String getPassword() {
         return password;
     }
@@ -45,5 +43,10 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " - " + lastName ;//+ " - " + email + " - " + password;
     }
 }
