@@ -1,5 +1,6 @@
 package com.developersstack.educationmanagementsystem.controller;
 
+import com.developersstack.educationmanagementsystem.database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,8 @@ public class LoginFormController {
     }
 
     public void loginOnAction(ActionEvent actionEvent) {
+        Database db = new Database();
+
     }
 
     private void setUI(String UI_Name) throws IOException {

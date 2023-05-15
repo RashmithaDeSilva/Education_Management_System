@@ -24,10 +24,12 @@ public class SignupFormController {
     public TextField txtEmail;
     public PasswordField txtConformPassword;
 
+    // Already have an account on action button
     public void alreadyHaveAnAccountOnAction(ActionEvent actionEvent) throws IOException {
         setUI("LoginForm");
     }
 
+    // Sign up on action button
     public void signupOnAction(ActionEvent actionEvent) throws IOException {
         String email = txtEmail.getText().toLowerCase();
         email = email.trim();
@@ -48,30 +50,27 @@ public class SignupFormController {
                         setUI("LoginForm");
 
                     }else {
-                        alertError("Password Incorrect !",
-                                "Set Password Correctly",
+                        alertError("Password Incorrect !", "Set Password Correctly",
                                 "Your Password and Conform Password is Not the Same !");
                     }
 
                 }else {
-                    alertError("Email Incorrect !",
-                            "Set Email Correctly",
+                    alertError("Email Incorrect !", "Set Email Correctly",
                             "Your Email is Incorrect !");
                 }
 
             }else {
-                alertError("Name Incorrect !",
-                        "Set Name Correctly",
+                alertError("Name Incorrect !", "Set Name Correctly",
                         "Your Last Name is Incorrect !");
             }
 
         } else {
-            alertError("Name Incorrect !",
-                    "Set Name Correctly",
+            alertError("Name Incorrect !", "Set Name Correctly",
                     "Your First Name is Incorrect !");
         }
     }
 
+    // Error alert
     private void alertError(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -80,6 +79,7 @@ public class SignupFormController {
         alert.show();
     }
 
+    // Set UI and change stage into another stage
     private void setUI(String UI_Name) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/" + UI_Name + ".fxml")));
         Stage stage = (Stage) contextSignupForm.getScene().getWindow();

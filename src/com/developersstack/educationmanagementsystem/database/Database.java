@@ -14,12 +14,12 @@ public class Database {
         userTable.add(user);
     }
 
-//    public User getUser(String email) {
-//        for (User user : userTable) {
-//            if (user.getEmail().equals(email)) {
-//                return user;
-//            }
-//        }
-//
-//    }
+    public boolean checkUserLogingInfomation(String email, String password) {
+        for(User u : userTable) {
+            if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
