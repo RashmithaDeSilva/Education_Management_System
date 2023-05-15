@@ -16,12 +16,12 @@
          </font>
       </Label>
       <Separator layoutX="32.0" layoutY="98.0" prefHeight="3.0" prefWidth="674.0" />
-      <Label fx:id="ldlDate" layoutX="616.0" layoutY="25.0" text="05-05-2023" textFill="#110796">
+      <Label fx:id="lblDate" layoutX="616.0" layoutY="25.0" text="05-05-2023" textFill="#110796">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="ldlTime" layoutX="639.0" layoutY="64.0" text="11:57:57" textFill="#110796">
+      <Label fx:id="lblTime" layoutX="639.0" layoutY="64.0" text="11:57:57" textFill="#110796">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
