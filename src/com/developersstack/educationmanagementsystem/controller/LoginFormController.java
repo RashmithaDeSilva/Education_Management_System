@@ -1,6 +1,5 @@
 package com.developersstack.educationmanagementsystem.controller;
 
-import com.developersstack.educationmanagementsystem.database.Database;
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +34,7 @@ public class LoginFormController {
 
         if (db.checkUserLogingInfomation(email, password)) {
             //new Alert(Alert.AlertType.CONFIRMATION).show();
+            System.out.println("Success !");
 
         } else {
             new Alert(Alert.AlertType.ERROR, "Wrong email or password").show();
