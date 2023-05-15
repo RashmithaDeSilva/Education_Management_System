@@ -26,15 +26,16 @@ public class LoginFormController {
     public void forgotPasswordOnAction(ActionEvent actionEvent) {
     }
 
-    public void loginOnAction(ActionEvent actionEvent) {
+    public void loginOnAction(ActionEvent actionEvent) throws IOException {
         DB_Connection db = new DB_Connection();
 
         String email = txtEmail.getText();
         String password = txtPassword.getText();
 
         if (db.checkUserLogingInfomation(email, password)) {
-            //new Alert(Alert.AlertType.CONFIRMATION).show();
-            System.out.println("Success !");
+            //System.out.println("Success !");
+            setUI("DashboardForm");
+            new Alert(Alert.AlertType.INFORMATION, "Login Successfully !").show();
 
         } else {
             new Alert(Alert.AlertType.ERROR, "Wrong email or password").show();
@@ -45,5 +46,6 @@ public class LoginFormController {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/" + UI_Name + ".fxml")));
         Stage stage = (Stage) contextLoginForm.getScene().getWindow();
         stage.setScene(new Scene(parent));
+        stage.centerOnScreen();
     }
 }

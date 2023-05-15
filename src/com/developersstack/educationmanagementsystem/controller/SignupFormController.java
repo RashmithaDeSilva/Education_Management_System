@@ -87,5 +87,6 @@ public class SignupFormController {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/" + UI_Name + ".fxml")));
         Stage stage = (Stage) contextSignupForm.getScene().getWindow();
         stage.setScene(new Scene(parent));
+        stage.centerOnScreen();
     }
 }
