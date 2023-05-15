@@ -1,5 +1,6 @@
 package com.developersstack.educationmanagementsystem.controller;
 
+import com.developersstack.educationmanagementsystem.model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,6 +29,9 @@ public class StudentFormController {
     }
 
     public void saveStudentOnAction(ActionEvent actionEvent) {
+        Student student = new Student(
+
+        );
     }
 
     private void setUI(String UI_Name) throws IOException {

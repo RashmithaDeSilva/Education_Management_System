@@ -9,7 +9,7 @@ public class Student {
     private Date dateOfBirth;
     private String address;
 
-    
+
     public Student() {
     }
     public Student(String id, String fullName, Date dateOfBirth, String address) {

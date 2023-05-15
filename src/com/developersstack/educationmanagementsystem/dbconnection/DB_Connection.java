@@ -1,6 +1,7 @@
 package com.developersstack.educationmanagementsystem.dbconnection;
 
 import com.developersstack.educationmanagementsystem.database.Database;
+import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
@@ -27,5 +28,14 @@ public class DB_Connection {
         Optional<User> selectedUser = Database.userTable.stream().filter(e->e.getEmail().equals(email)).findFirst();
         // return selectedUser.map(user -> user.getPassword().equals(password)).orElse(false);
         return selectedUser.filter(user -> pm.checkPassword(password, user.getPassword())).isPresent();
+    }
+
+    public void addStudent(Student student) {
+        Database.studentTable.add(student);
+    }
+
+    public boolean checkStudentID(String id) {
+        Optional<Student> selectStudent = Database.studentTable.stream().filter(e->e.getId().equals(id)).findFirst();
+        return selectStudent.isPresent();
     }
 }
