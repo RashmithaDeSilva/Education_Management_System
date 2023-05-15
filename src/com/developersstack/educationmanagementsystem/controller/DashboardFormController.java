@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.input.DataFormat;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -20,6 +19,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
+
 
 public class DashboardFormController {
     public AnchorPane contextDashboard;
@@ -45,8 +45,8 @@ public class DashboardFormController {
         lblDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
     }
 
-    public void studentOnAction(ActionEvent actionEvent) {
-
+    public void studentOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("StudentForm");
     }
 
     public void intakesOnA(ActionEvent actionEvent) {
