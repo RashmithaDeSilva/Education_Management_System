@@ -1,17 +1,25 @@
 package com.developersstack.educationmanagementsystem.database;
 
-import com.developersstack.educationmanagementsystem.model.User;
 
+import com.developersstack.educationmanagementsystem.model.User;
 import java.util.ArrayList;
+
 
 public class Database {
 
-    private ArrayList<User> usersArrayList = new ArrayList<User>();
+    private static ArrayList<User> userTable = new ArrayList<>();
 
-    public ArrayList<User> getUsersArrayList() {
-        return usersArrayList;
+
+    public void addUser(User user) {
+        userTable.add(user);
     }
-    public void setUsersArrayList(ArrayList<User> usersArrayList) {
-        this.usersArrayList = usersArrayList;
-    }
+
+//    public User getUser(String email) {
+//        for (User user : userTable) {
+//            if (user.getEmail().equals(email)) {
+//                return user;
+//            }
+//        }
+//
+//    }
 }

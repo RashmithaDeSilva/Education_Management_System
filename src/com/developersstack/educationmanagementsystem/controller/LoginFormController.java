@@ -18,7 +18,7 @@ public class LoginFormController {
     public PasswordField txtPassword;
 
     public void createAccountOnAction(ActionEvent actionEvent) throws IOException {
-        setUI("../view/SignupForm.fxml");
+        setUI("SignupForm");
     }
 
     public void forgotPasswordOnAction(ActionEvent actionEvent) {
@@ -27,10 +27,9 @@ public class LoginFormController {
     public void loginOnAction(ActionEvent actionEvent) {
     }
 
-    private void setUI(String location) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(location)));
+    private void setUI(String UI_Name) throws IOException {
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/" + UI_Name + ".fxml")));
         Stage stage = (Stage) contextLoginForm.getScene().getWindow();
         stage.setScene(new Scene(parent));
-        stage.centerOnScreen();
     }
 }
