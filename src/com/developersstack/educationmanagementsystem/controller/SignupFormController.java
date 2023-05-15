@@ -1,9 +1,9 @@
 package com.developersstack.educationmanagementsystem.controller;
 
-import com.developersstack.educationmanagementsystem.database.Database;
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.User;
-import com.developersstack.educationmanagementsystem.validation.UserValidation;
+import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
+import com.developersstack.educationmanagementsystem.util.validation.UserValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,12 +41,14 @@ public class SignupFormController {
 
         UserValidation uv = new UserValidation();
         DB_Connection db = new DB_Connection();
+        PasswordManager pm = new PasswordManager();
 
         if (uv.nameValidation(firstName)) {
             if (uv.nameValidation(lastName)) {
                 if (uv.emailValidation(email)) {
                     if (uv.passwordValidation(password, conformPassword)) {
-                        db.addUser(new User(firstName, lastName, email, password));
+                        // String hashPassword = pm.encode(password);
+                        db.addUser(new User(firstName, lastName, email, pm.encode(password)));
                         new Alert(Alert.AlertType.INFORMATION, "Welcome!").show();
                         setUI("LoginForm");
 

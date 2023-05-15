@@ -1,4 +1,4 @@
-package com.developersstack.educationmanagementsystem.validation;
+package com.developersstack.educationmanagementsystem.util.validation;
 
 public class UserValidation {
 
