@@ -1,6 +1,7 @@
 package com.developersstack.educationmanagementsystem.database;
 
 
+import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class Database {
 
     public static ArrayList<User> userTable = new ArrayList<>();
+    public static ArrayList<Student> studentTable = new ArrayList<>();
 
     static {
 

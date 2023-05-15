@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ public class StudentFormController {
     public TextField txtFullName;
     public TextField txtAddress;
     public TextField txtSearch;
+    public DatePicker txtDOB;
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
         setUI("DashboardForm");
