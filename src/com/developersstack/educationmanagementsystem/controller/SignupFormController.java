@@ -1,6 +1,7 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.database.Database;
+import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.validation.UserValidation;
 import javafx.event.ActionEvent;
@@ -39,7 +40,7 @@ public class SignupFormController {
         String conformPassword = txtConformPassword.getText().trim();
 
         UserValidation uv = new UserValidation();
-        Database db = new Database();
+        DB_Connection db = new DB_Connection();
 
         if (uv.nameValidation(firstName)) {
             if (uv.nameValidation(lastName)) {

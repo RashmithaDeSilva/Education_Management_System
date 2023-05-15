@@ -7,19 +7,11 @@ import java.util.ArrayList;
 
 public class Database {
 
-    private static ArrayList<User> userTable = new ArrayList<>();
+    public static ArrayList<User> userTable = new ArrayList<>();
 
-
-    public void addUser(User user) {
-        userTable.add(user);
-    }
-
-    public boolean checkUserLogingInfomation(String email, String password) {
-        for(User u : userTable) {
-            if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
-                return true;
-            }
-        }
-        return false;
+    static {
+        userTable.add(new User("amal", "kumara", "ak@gmail.com", "12345"));
+        userTable.add(new User("kamal", "sampath", "ks@gmail.com", "12345"));
+        userTable.add(new User("nimal", "shantha", "ns@gmail.com", "12345"));
     }
 }

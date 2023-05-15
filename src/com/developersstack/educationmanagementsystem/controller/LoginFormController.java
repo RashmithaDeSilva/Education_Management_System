@@ -1,10 +1,12 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.database.Database;
+import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -26,8 +28,16 @@ public class LoginFormController {
     }
 
     public void loginOnAction(ActionEvent actionEvent) {
-        Database db = new Database();
+        DB_Connection db = new DB_Connection();
 
+        String email = txtEmail.getText();
+        String password = txtPassword.getText();
+
+        if (db.checkUserLogingInfomation(email, password)) {
+            new Alert(Alert.AlertType.CONFIRMATION).show();
+        } else {
+            new Alert(Alert.AlertType.ERROR ).show();
+        }
     }
 
     private void setUI(String UI_Name) throws IOException {
