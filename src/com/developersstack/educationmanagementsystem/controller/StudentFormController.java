@@ -35,6 +35,7 @@ public class StudentFormController {
     public TableColumn<Object, String> colAddress;
     public TableColumn<Object, Button> colOption;
     public Button btnSaveAndUpdateStudent;
+    private String searchText = "";
     private final DB_Connection dbcon = new DB_Connection();
 
 
@@ -47,7 +48,12 @@ public class StudentFormController {
         colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         setStudentID();
-        setTableData();
+        setTableData(searchText);
+
+        txtSearch.textProperty().addListener(((observable, oldValue, newValue) -> {
+            searchText = newValue.toLowerCase();
+            setTableData(searchText);
+        }));
 
         tblStudent.getSelectionModel().selectedItemProperty()
                 .addListener(((observable, oldValue, newValue) -> {
@@ -92,7 +98,7 @@ public class StudentFormController {
                     }
 
                     resetStudentDetailBox();
-                    setTableData();
+                    setTableData(searchText);
 
                 } else {
                     alertError("Address Incorrect !", "Set Address Correctly",
@@ -118,26 +124,28 @@ public class StudentFormController {
         btnSaveAndUpdateStudent.setText("Update Student");
     }
 
-    private void setTableData() {
+    private void setTableData(String searchText) {
         ObservableList<StudentTM> obList = FXCollections.observableArrayList();
 
         for (Student st : dbcon.getStudentTable()) {
 
-            Button btn = new Button("Delete");
+            if (st.getFullName().toLowerCase().contains(searchText)) {
+                Button btn = new Button("Delete");
 
-            obList.add(new StudentTM(st.getId(), st.getFullName(),
-                    String.valueOf(st.getDateOfBirth()), st.getAddress(), btn));
+                obList.add(new StudentTM(st.getId(), st.getFullName(),
+                        String.valueOf(st.getDateOfBirth()), st.getAddress(), btn));
 
-            btn.setOnAction(e->{
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
-                        ButtonType.YES, ButtonType.NO);
-                Optional<ButtonType> buttonType = alert.showAndWait();
-                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
-                    dbcon.deleteStudent(st);
-                    setTableData();
-                    new Alert(Alert.AlertType.INFORMATION, "Student Delete Successfully").show();
-                }
-            });
+                btn.setOnAction(e->{
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                            ButtonType.YES, ButtonType.NO);
+                    Optional<ButtonType> buttonType = alert.showAndWait();
+                    if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                        dbcon.deleteStudent(st);
+                        setTableData(searchText);
+                        new Alert(Alert.AlertType.INFORMATION, "Student Delete Successfully").show();
+                    }
+                });
+            }
         }
         tblStudent.setItems(obList);
     }
