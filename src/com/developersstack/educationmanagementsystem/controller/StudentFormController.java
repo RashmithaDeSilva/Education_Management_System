@@ -3,13 +3,12 @@ package com.developersstack.educationmanagementsystem.controller;
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.util.validation.StudentValidation;
+import com.developersstack.educationmanagementsystem.view.tm.StudentTM;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -26,6 +25,12 @@ public class StudentFormController {
     public TextField txtSearch;
     public DatePicker txtDOB;
     private final DB_Connection dbcon = new DB_Connection();
+    public TableView<StudentTM> tblStudent;
+    public TableColumn colID;
+    public TableColumn colName;
+    public TableColumn colDOB;
+    public TableColumn colAddress;
+    public TableColumn colOption;
 
     public void initialize() {
         setStudentID();
@@ -51,7 +56,7 @@ public class StudentFormController {
                 if (sv.addressValidation(address)) {
 
                     dbcon.addStudent(new Student(id, name, LocalDate.parse(dob), address));
-                    clearStudentDetailBox();
+                    resetStudentDetailBox();
                     new Alert(Alert.AlertType.INFORMATION, "Student Added Successfully!").show();
 
                 } else {
@@ -99,7 +104,7 @@ public class StudentFormController {
         alert.show();
     }
 
-    private void clearStudentDetailBox() {
+    private void resetStudentDetailBox() {
         setStudentID();
         txtFullName.clear();
         txtDOB.setValue(null);

@@ -64,13 +64,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView layoutX="31.0" layoutY="186.0" prefHeight="200.0" prefWidth="669.0">
+      <TableView fx:id="tblStudent" layoutX="31.0" layoutY="186.0" prefHeight="200.0" prefWidth="669.0">
         <columns>
-          <TableColumn editable="false" prefWidth="81.0" resizable="false" text="# ID" />
-          <TableColumn editable="false" prefWidth="194.0" resizable="false" text="Full Name" />
-            <TableColumn editable="false" prefWidth="112.0" resizable="false" text="DOB" />
-            <TableColumn editable="false" prefWidth="186.0" resizable="false" text="Address" />
-            <TableColumn editable="false" prefWidth="95.0" resizable="false" text="Option" />
+          <TableColumn fx:id="colID" editable="false" prefWidth="81.0" resizable="false" text="# ID" />
+          <TableColumn fx:id="colName" editable="false" prefWidth="194.0" resizable="false" text="Full Name" />
+            <TableColumn fx:id="colDOB" editable="false" prefWidth="112.0" resizable="false" text="DOB" />
+            <TableColumn fx:id="colAddress" editable="false" prefWidth="186.0" resizable="false" text="Address" />
+            <TableColumn fx:id="colOption" editable="false" prefWidth="95.0" resizable="false" text="Option" />
         </columns>
       </TableView>
    </children>
