@@ -40,18 +40,18 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtFullName" editable="false" layoutX="136.0" layoutY="100.0" prefHeight="30.0" prefWidth="198.0" promptText="Full Name">
+      <TextField fx:id="txtFullName" layoutX="136.0" layoutY="100.0" prefHeight="30.0" prefWidth="198.0" promptText="Full Name">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
       <DatePicker fx:id="txtDOB" layoutX="347.0" layoutY="100.0" prefHeight="30.0" prefWidth="146.0" promptText="Date of Birth" />
-      <TextField fx:id="txtAddress" editable="false" layoutX="505.0" layoutY="100.0" prefHeight="30.0" prefWidth="198.0" promptText="Address">
+      <TextField fx:id="txtAddress" layoutX="505.0" layoutY="100.0" prefHeight="30.0" prefWidth="198.0" promptText="Address">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtSearch" editable="false" layoutX="32.0" layoutY="143.0" prefHeight="30.0" prefWidth="520.0" promptText="Search here">
+      <TextField fx:id="txtSearch" layoutX="32.0" layoutY="143.0" prefHeight="30.0" prefWidth="520.0" promptText="Search here">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
