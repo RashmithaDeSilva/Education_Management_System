@@ -25,6 +25,11 @@ public class StudentFormController {
     public TextField txtAddress;
     public TextField txtSearch;
     public DatePicker txtDOB;
+    private final DB_Connection dbcon = new DB_Connection();
+
+    public void initialize() {
+        setStudentID();
+    }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
         setUI("DashboardForm");
@@ -40,7 +45,6 @@ public class StudentFormController {
         String address = txtAddress.getText();
 
         StudentValidation sv = new StudentValidation();
-        DB_Connection dbcon = new DB_Connection();
 
         if (sv.nameValidation(name)) {
             if (sv.DOB_Validation(dob)) {
@@ -64,8 +68,20 @@ public class StudentFormController {
             alertError("Name Incorrect !", "Set Name Correctly",
                     "Student Name is Incorrect !");
         }
+    }
 
+    private void setStudentID() {
+        if (!dbcon.getLastStudentID().equalsIgnoreCase("empty")) {
+            String[] idArray = dbcon.getLastStudentID().split("-");
+            String idNumber = "";
+            for (int i=1;i<idArray.length;i++) {
+                idNumber += idArray[i];
+            }
+            txtStudentID.setText("S-"+(Integer.parseInt(idNumber)+1));
 
+        } else {
+            txtStudentID.setText("S-1");
+        }
     }
 
     private void setUI(String UI_Name) throws IOException {
@@ -84,7 +100,7 @@ public class StudentFormController {
     }
 
     private void clearStudentDetailBox() {
-        txtStudentID.clear();
+        setStudentID();
         txtFullName.clear();
         txtDOB.setValue(null);
         txtAddress.clear();

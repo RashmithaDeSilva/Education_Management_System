@@ -38,4 +38,9 @@ public class DB_Connection {
         Optional<Student> selectStudent = Database.studentTable.stream().filter(e->e.getId().equals(id)).findFirst();
         return selectStudent.isPresent();
     }
+
+    public String getLastStudentID() {
+        return !Database.studentTable.isEmpty() ?
+                Database.studentTable.get(Database.studentTable.size()-1).getId() : "Empty";
+    }
 }
