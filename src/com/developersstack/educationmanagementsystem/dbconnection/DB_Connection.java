@@ -58,4 +58,8 @@ public class DB_Connection {
             selectedStudent.get().setAddress(student.getAddress());
         }
     }
+
+    public void deleteStudent(Student st) {
+        Database.studentTable.remove(st);
+    }
 }

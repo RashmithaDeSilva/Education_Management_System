@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 public class StudentFormController {
     public AnchorPane contextStudentForm;
@@ -119,9 +120,24 @@ public class StudentFormController {
 
     private void setTableData() {
         ObservableList<StudentTM> obList = FXCollections.observableArrayList();
+
         for (Student st : dbcon.getStudentTable()) {
-            obList.add(new StudentTM(st.getId(), st.getFullName(), String.valueOf(st.getDateOfBirth()),
-                    st.getAddress(), new Button("Delete")));
+
+            Button btn = new Button("Delete");
+
+            obList.add(new StudentTM(st.getId(), st.getFullName(),
+                    String.valueOf(st.getDateOfBirth()), st.getAddress(), btn));
+
+            btn.setOnAction(e->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                        ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                    dbcon.deleteStudent(st);
+                    setTableData();
+                    new Alert(Alert.AlertType.INFORMATION, "Student Delete Successfully").show();
+                }
+            });
         }
         tblStudent.setItems(obList);
     }
