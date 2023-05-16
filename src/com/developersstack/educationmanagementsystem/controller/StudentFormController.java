@@ -33,6 +33,7 @@ public class StudentFormController {
     public TableColumn<Object, String> colDOB;
     public TableColumn<Object, String> colAddress;
     public TableColumn<Object, Button> colOption;
+    public Button btnSaveAndUpdateStudent;
     private final DB_Connection dbcon = new DB_Connection();
 
 
@@ -46,6 +47,13 @@ public class StudentFormController {
 
         setStudentID();
         setTableData();
+
+        tblStudent.getSelectionModel().selectedItemProperty()
+                .addListener(((observable, oldValue, newValue) -> {
+                    if (null != newValue) {
+                        setData(newValue);
+                    }
+        }));
     }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
@@ -53,9 +61,12 @@ public class StudentFormController {
     }
 
     public void addNewStudentOnAction(ActionEvent actionEvent) {
+        resetStudentDetailBox();
+        btnSaveAndUpdateStudent.setText("Save Student");
     }
 
     public void saveStudentOnAction(ActionEvent actionEvent) throws ParseException {
+
         String id = txtStudentID.getText();
         String name = txtFullName.getText();
         String dob = String.valueOf(txtDOB.getValue());
@@ -66,11 +77,21 @@ public class StudentFormController {
         if (sv.nameValidation(name)) {
             if (sv.DOB_Validation(dob)) {
                 if (sv.addressValidation(address)) {
+                    if (btnSaveAndUpdateStudent.getText().equalsIgnoreCase("save student")) {
 
-                    dbcon.addStudent(new Student(id, name, LocalDate.parse(dob), address));
+                        dbcon.addStudent(new Student(id, name, LocalDate.parse(dob), address));
+                        new Alert(Alert.AlertType.INFORMATION, "Student Added Successfully!").show();
+
+                    }  else {
+
+                        dbcon.updateStudentDetails(new Student(id, name, LocalDate.parse(dob), address));
+                        btnSaveAndUpdateStudent.setText("Save Student");
+                        new Alert(Alert.AlertType.INFORMATION, "Student Details Update Successfully!").show();
+
+                    }
+
                     resetStudentDetailBox();
                     setTableData();
-                    new Alert(Alert.AlertType.INFORMATION, "Student Added Successfully!").show();
 
                 } else {
                     alertError("Address Incorrect !", "Set Address Correctly",
@@ -86,6 +107,14 @@ public class StudentFormController {
             alertError("Name Incorrect !", "Set Name Correctly",
                     "Student Name is Incorrect !");
         }
+    }
+
+    private void setData(StudentTM tm) {
+        txtStudentID.setText(tm.getId());
+        txtFullName.setText(tm.getName());
+        txtDOB.setValue(LocalDate.parse(tm.getDob()));
+        txtAddress.setText(tm.getAddress());
+        btnSaveAndUpdateStudent.setText("Update Student");
     }
 
     private void setTableData() {

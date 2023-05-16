@@ -56,7 +56,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="568.0" layoutY="141.0" mnemonicParsing="false" onAction="#saveStudentOnAction" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: #0099ff;" text="Save Student" textFill="WHITE">
+      <Button fx:id="btnSaveAndUpdateStudent" layoutX="568.0" layoutY="141.0" mnemonicParsing="false" onAction="#saveStudentOnAction" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: #0099ff;" text="Save Student" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

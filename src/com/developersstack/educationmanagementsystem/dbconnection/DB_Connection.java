@@ -48,4 +48,14 @@ public class DB_Connection {
     public ArrayList<Student> getStudentTable() {
         return Database.studentTable;
     }
+
+    public void updateStudentDetails(Student student) {
+        Optional<Student> selectedStudent = Database.studentTable.stream().filter(
+                e->e.getId().equals(student.getId())).findFirst();
+        if (selectedStudent.isPresent()) {
+            selectedStudent.get().setFullName(student.getFullName());
+            selectedStudent.get().setDateOfBirth(student.getDateOfBirth());
+            selectedStudent.get().setAddress(student.getAddress());
+        }
+    }
 }
