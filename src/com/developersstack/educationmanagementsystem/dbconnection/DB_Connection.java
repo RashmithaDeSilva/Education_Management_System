@@ -5,6 +5,7 @@ import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class DB_Connection {
@@ -42,5 +43,9 @@ public class DB_Connection {
     public String getLastStudentID() {
         return !Database.studentTable.isEmpty() ?
                 Database.studentTable.get(Database.studentTable.size()-1).getId() : "Empty";
+    }
+
+    public ArrayList<Student> getStudentTable() {
+        return Database.studentTable;
     }
 }

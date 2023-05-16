@@ -4,11 +4,14 @@ import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.util.validation.StudentValidation;
 import com.developersstack.educationmanagementsystem.view.tm.StudentTM;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,16 +27,25 @@ public class StudentFormController {
     public TextField txtAddress;
     public TextField txtSearch;
     public DatePicker txtDOB;
-    private final DB_Connection dbcon = new DB_Connection();
     public TableView<StudentTM> tblStudent;
-    public TableColumn colID;
-    public TableColumn colName;
-    public TableColumn colDOB;
-    public TableColumn colAddress;
-    public TableColumn colOption;
+    public TableColumn<Object, String> colID;
+    public TableColumn<Object, String> colName;
+    public TableColumn<Object, String> colDOB;
+    public TableColumn<Object, String> colAddress;
+    public TableColumn<Object, Button> colOption;
+    private final DB_Connection dbcon = new DB_Connection();
+
 
     public void initialize() {
+
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
+
         setStudentID();
+        setTableData();
     }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
@@ -57,6 +69,7 @@ public class StudentFormController {
 
                     dbcon.addStudent(new Student(id, name, LocalDate.parse(dob), address));
                     resetStudentDetailBox();
+                    setTableData();
                     new Alert(Alert.AlertType.INFORMATION, "Student Added Successfully!").show();
 
                 } else {
@@ -73,6 +86,15 @@ public class StudentFormController {
             alertError("Name Incorrect !", "Set Name Correctly",
                     "Student Name is Incorrect !");
         }
+    }
+
+    private void setTableData() {
+        ObservableList<StudentTM> obList = FXCollections.observableArrayList();
+        for (Student st : dbcon.getStudentTable()) {
+            obList.add(new StudentTM(st.getId(), st.getFullName(), String.valueOf(st.getDateOfBirth()),
+                    st.getAddress(), new Button("Delete")));
+        }
+        tblStudent.setItems(obList);
     }
 
     private void setStudentID() {
