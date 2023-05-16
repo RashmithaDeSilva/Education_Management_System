@@ -1,18 +1,18 @@
 package com.developersstack.educationmanagementsystem.model;
+import java.time.LocalDate;
 
-import java.util.Date;
 
 public class Student {
 
     private String id;
     private String fullName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String address;
 
 
     public Student() {
     }
-    public Student(String id, String fullName, Date dateOfBirth, String address) {
+    public Student(String id, String fullName, LocalDate dateOfBirth, String address) {
         this.id = id;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -26,9 +26,7 @@ public class Student {
     public String getFullName() {
         return fullName;
     }
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
+    public LocalDate getDateOfBirth() {return dateOfBirth;}
     public String getAddress() {
         return address;
     }
@@ -40,7 +38,7 @@ public class Student {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     public void setAddress(String address) {

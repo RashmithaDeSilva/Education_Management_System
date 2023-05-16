@@ -1,5 +1,6 @@
 package com.developersstack.educationmanagementsystem.controller;
 
+import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.util.validation.StudentValidation;
 import javafx.event.ActionEvent;
@@ -13,7 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Date;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class StudentFormController {
@@ -31,21 +33,22 @@ public class StudentFormController {
     public void addNewStudentOnAction(ActionEvent actionEvent) {
     }
 
-    public void saveStudentOnAction(ActionEvent actionEvent) {
+    public void saveStudentOnAction(ActionEvent actionEvent) throws ParseException {
         String id = txtStudentID.getText();
         String name = txtFullName.getText();
         String dob = String.valueOf(txtDOB.getValue());
         String address = txtAddress.getText();
 
         StudentValidation sv = new StudentValidation();
+        DB_Connection dbcon = new DB_Connection();
 
-        //System.out.println(new Date(txtDOB.getValue().toEpochDay()));
         if (sv.nameValidation(name)) {
             if (sv.DOB_Validation(dob)) {
                 if (sv.addressValidation(address)) {
-                    Student student = new Student(id, name, new Date(txtDOB.getValue().toEpochDay()), address);
-                    new Alert(Alert.AlertType.INFORMATION, "Student Added Successfully!").show();
+
+                    dbcon.addStudent(new Student(id, name, LocalDate.parse(dob), address));
                     clearStudentDetailBox();
+                    new Alert(Alert.AlertType.INFORMATION, "Student Added Successfully!").show();
 
                 } else {
                     alertError("Address Incorrect !", "Set Address Correctly",
