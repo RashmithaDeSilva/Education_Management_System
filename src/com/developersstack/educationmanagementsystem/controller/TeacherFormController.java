@@ -46,6 +46,12 @@ public class TeacherFormController {
         setCode();
         setDataIntoTable();
 
+        tblTeacher.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (null != newValue) {
+                        setDate(newValue);
+                    }
+        });
 
     }
 
@@ -65,7 +71,16 @@ public class TeacherFormController {
         if  (tv.nameValidation(name)) {
             if (tv.contactNumberValidation(contactNumbre)) {
                 if (tv.addressValidation(address)) {
-                    dbcon.addTeacher(new Teacher(code, name, contactNumbre, address));
+                    if (btnSaveAndUpdateTeacher.getText().equalsIgnoreCase("save teacher")) {
+                        dbcon.addTeacher(new Teacher(code, name, contactNumbre, address));
+                        new Alert(Alert.AlertType.INFORMATION, "Teacher Added Successfully!").show();
+
+                    } else {
+                        dbcon.updateTeacherDetails(new Teacher(code, name, contactNumbre, address));
+                        btnSaveAndUpdateTeacher.setText("Save Teacher");
+                        new Alert(Alert.AlertType.INFORMATION, "Teacher Details Update Successfully!").show();
+                    }
+
                     resetInputBox();
                     setDataIntoTable();
 
@@ -87,6 +102,14 @@ public class TeacherFormController {
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
         setUI("DashboardForm");
+    }
+
+    private void setDate(TeacherTM tm) {
+        txtCode.setText(tm.getCode());
+        txtName.setText(tm.getName());
+        txtContactNubmer.setText(tm.getContactNumber());
+        txtAddress.setText(tm.getAddress());
+        btnSaveAndUpdateTeacher.setText("Update Teacher");
     }
 
     private void setDataIntoTable() {

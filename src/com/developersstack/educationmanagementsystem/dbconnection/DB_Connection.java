@@ -77,4 +77,14 @@ public class DB_Connection {
     public ArrayList<Teacher> getTeacherTable() {
         return Database.teachersTable;
     }
+
+    public void updateTeacherDetails(Teacher teacher) {
+        Optional<Teacher> selectedTeacher = Database.teachersTable.stream().filter(
+                e->e.getCode().equals(teacher.getCode())).findFirst();
+        if (selectedTeacher.isPresent()) {
+            selectedTeacher.get().setName(teacher.getName());
+            selectedTeacher.get().setContactNumber(teacher.getContactNumber());
+            selectedTeacher.get().setAddress(teacher.getAddress());
+        }
+    }
 }
