@@ -26,26 +26,38 @@ public class ForgotPasswordFormController {
     public AnchorPane contextForgotPassword;
     public TextField txtEmail;
 
-    public void sendVerificationOnAction(ActionEvent actionEvent) throws MessagingException {
+    public void sendVerificationOnAction(ActionEvent actionEvent) {
         int verificationCode = new VerificationCodeGenerator().getCode(5);
 
         if (new DB_Connection().checkEmail(txtEmail.getText())) {
             String fromEmail = "lahirusellahandi@gmail.com";
             String toEmail = txtEmail.getText();
-            String host = "localhost";
+            String host = "127.0.0.1";
 
             Properties properties = System.getProperties();
             properties.setProperty("mail.smtp", host); // node => nodemailer, (sendGrid, twilio)
             Session session = Session.getDefaultInstance(properties);
 
-            MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(fromEmail));
-            mimeMessage.setSubject("Verification Code");
-            mimeMessage.setText("Verification code : " + verificationCode);
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+            try {
+                MimeMessage mimeMessage = new MimeMessage(session);
+                mimeMessage.setFrom(new InternetAddress(fromEmail));
+                mimeMessage.setSubject("Verification Code");
+                mimeMessage.setText("Verification code : " + verificationCode);
+                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
-            Transport.send(mimeMessage);
-            System.out.println("OK");
+                // Transport.send(mimeMessage);
+                // System.out.println("OK");
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CodeVerificationForm.fxml"));
+                Parent parent = fxmlLoader.load();
+                CodeVerificationFormController controller = fxmlLoader.getController();
+                controller.setUserData(verificationCode, txtEmail.getText());
+                Stage stage = (Stage) contextForgotPassword.getScene().getWindow();
+                stage.setScene(new Scene(parent));
+
+            } catch (IOException | MessagingException  e) {
+                throw new RuntimeException(e);
+            }
 
         } else {
             new Alert(Alert.AlertType.ERROR, "This Email is Incorrect !").show();
