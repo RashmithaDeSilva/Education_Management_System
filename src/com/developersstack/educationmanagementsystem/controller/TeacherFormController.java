@@ -36,6 +36,8 @@ public class TeacherFormController {
     }
 
     public void addNewTeacherOnAction(ActionEvent actionEvent) {
+        resetInputBox();
+        btnSaveAndUpdateTeacher.setText("Save Teacher");
     }
 
     public void saveAndUpdateTeacherOnAction(ActionEvent actionEvent) {
