@@ -4,16 +4,16 @@ public class Teacher {
 
     private String code;
     private String name;
-    private String address;
     private String contactNumber;
+    private String address;
 
 
     public Teacher() {}
-    public Teacher(String code, String name, String address, String contactNumber) {
+    public Teacher(String code, String name, String contactNumber, String address) {
         this.code = code;
         this.name = name;
-        this.address = address;
         this.contactNumber = contactNumber;
+        this.address = address;
     }
 
 

@@ -2,6 +2,7 @@ package com.developersstack.educationmanagementsystem.dbconnection;
 
 import com.developersstack.educationmanagementsystem.database.Database;
 import com.developersstack.educationmanagementsystem.model.Student;
+import com.developersstack.educationmanagementsystem.model.Teacher;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public class DB_Connection {
 
+    // User Operations
     public void addUser(User user) {
         Database.userTable.add(user);
     }
@@ -31,9 +33,9 @@ public class DB_Connection {
         return selectedUser.filter(user -> pm.checkPassword(password, user.getPassword())).isPresent();
     }
 
-    public void addStudent(Student student) {
-        Database.studentTable.add(student);
-    }
+
+    // Student Operations
+    public void addStudent(Student student) {Database.studentTable.add(student);}
 
     public boolean checkStudentID(String id) {
         Optional<Student> selectStudent = Database.studentTable.stream().filter(e->e.getId().equals(id)).findFirst();
@@ -61,5 +63,14 @@ public class DB_Connection {
 
     public void deleteStudent(Student st) {
         Database.studentTable.remove(st);
+    }
+
+
+    // Teacher Operations
+    public void addTeacher(Teacher teacher) {Database.teachersTable.add(teacher);}
+
+    public String getLastTeacherCode() {
+        return !Database.teachersTable.isEmpty() ?
+                Database.teachersTable.get(Database.teachersTable.size()-1).getCode() : "Empty";
     }
 }
