@@ -73,4 +73,8 @@ public class DB_Connection {
         return !Database.teachersTable.isEmpty() ?
                 Database.teachersTable.get(Database.teachersTable.size()-1).getCode() : "Empty";
     }
+
+    public ArrayList<Teacher> getTeacherTable() {
+        return Database.teachersTable;
+    }
 }

@@ -3,11 +3,15 @@ package com.developersstack.educationmanagementsystem.controller;
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.Teacher;
 import com.developersstack.educationmanagementsystem.util.validation.TeacherValidation;
+import com.developersstack.educationmanagementsystem.view.tm.TeacherTM;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,17 +26,27 @@ public class TeacherFormController {
     public TextField txtContactNubmer;
     public TextField txtAddress;
     public TextField txtSearch;
-    public TableView tblTeacher;
-    public TableColumn colCode;
-    public TableColumn colName;
-    public TableColumn colContactNumber;
-    public TableColumn colAddress;
-    public TableColumn colOption;
-    private DB_Connection dbcon = new DB_Connection();
+    public TableView<TeacherTM> tblTeacher;
+    public TableColumn<Object, String> colCode;
+    public TableColumn<Object, String> colName;
+    public TableColumn<Object, String> colContactNumber;
+    public TableColumn<Object, String> colAddress;
+    public TableColumn<Object, Button> colOption;
+    private final DB_Connection dbcon = new DB_Connection();
 
 
     public void initialize() {
+
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colContactNumber.setCellValueFactory(new PropertyValueFactory<>("contactNumber"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
+
         setCode();
+        setDataIntoTable();
+
+
     }
 
     public void addNewTeacherOnAction(ActionEvent actionEvent) {
@@ -53,6 +67,7 @@ public class TeacherFormController {
                 if (tv.addressValidation(address)) {
                     dbcon.addTeacher(new Teacher(code, name, contactNumbre, address));
                     resetInputBox();
+                    setDataIntoTable();
 
                 } else {
                     alertError("Address Incorrect !", "Set Address Correctly",
@@ -72,6 +87,17 @@ public class TeacherFormController {
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
         setUI("DashboardForm");
+    }
+
+    private void setDataIntoTable() {
+        ObservableList<TeacherTM> obList = FXCollections.observableArrayList();
+
+        for (Teacher t : dbcon.getTeacherTable()) {
+            Button btn = new Button("Delete");
+            obList.add(new TeacherTM(t.getCode(), t.getName(), t.getContactNumber(), t.getAddress(), btn));
+        }
+
+        tblTeacher.setItems(obList);
     }
 
     private void resetInputBox() {

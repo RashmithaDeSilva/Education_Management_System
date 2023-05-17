@@ -6,17 +6,17 @@ public class TeacherTM {
 
     private String code;
     private String name;
-    private String address;
     private String contactNumber;
+    private String address;
     private Button button;
 
 
     public TeacherTM() {}
-    public TeacherTM(String code, String name, String address, String contactNumber, Button button) {
+    public TeacherTM(String code, String name, String contactNumber, String address, Button button) {
         this.code = code;
         this.name = name;
-        this.address = address;
         this.contactNumber = contactNumber;
+        this.address = address;
         this.button = button;
     }
 

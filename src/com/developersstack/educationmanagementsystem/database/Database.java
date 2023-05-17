@@ -29,8 +29,8 @@ public class Database {
         studentTable.add(new Student("S-2", "Kumara", LocalDate.parse("2012-05-08"), "Panadura"));
         studentTable.add(new Student("S-3", "Selvam", LocalDate.parse("2012-05-08"), "Kaluthara"));
 
-        teachersTable.add(new Teacher("T-1", "Sanduni", "Galle", "+94123456789"));
-        teachersTable.add(new Teacher("T-2", "Saman", "Colombo", "+94123456789"));
-        teachersTable.add(new Teacher("T-3", "Niwarthan", "Panadura", "+94123456789"));
+        teachersTable.add(new Teacher("T-1", "Sanduni", "+94123456789", "Galle"));
+        teachersTable.add(new Teacher("T-2", "Saman", "+94123456789", "Colombo"));
+        teachersTable.add(new Teacher("T-3", "Niwarthan", "+94123456789", "Panadura"));
     }
 }
