@@ -25,7 +25,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="32.0" layoutY="123.0" mnemonicParsing="false" onAction="#studentOnAction" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: #0066ff;" text="Student" textFill="WHITE" AnchorPane.rightAnchor="557.0">
+      <Button layoutX="32.0" layoutY="123.0" mnemonicParsing="false" onAction="#studentOnAction" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: #0066ff;" text="Students" textFill="WHITE" AnchorPane.rightAnchor="557.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

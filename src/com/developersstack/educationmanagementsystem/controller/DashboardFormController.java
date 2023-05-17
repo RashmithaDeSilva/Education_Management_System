@@ -45,19 +45,14 @@ public class DashboardFormController {
         lblDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
     }
 
-    public void studentOnAction(ActionEvent actionEvent) throws IOException {
-        setUI("StudentForm");
-    }
+    public void studentOnAction(ActionEvent actionEvent) throws IOException {setUI("StudentForm");}
 
     public void intakesOnA(ActionEvent actionEvent) {
     }
 
-    public void programsOnAction(ActionEvent actionEvent) {
-    }
+    public void programsOnAction(ActionEvent actionEvent) throws IOException {setUI("ProgramForm");}
 
-    public void teachersOnAction(ActionEvent actionEvent) throws IOException {
-        setUI("TeacherForm");
-    }
+    public void teachersOnAction(ActionEvent actionEvent) throws IOException {setUI("TeacherForm");}
 
     public void registrationOnAction(ActionEvent actionEvent) {
     }
