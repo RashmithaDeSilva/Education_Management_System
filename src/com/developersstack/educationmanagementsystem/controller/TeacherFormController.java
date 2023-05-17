@@ -33,6 +33,7 @@ public class TeacherFormController {
     public TableColumn<Object, String> colContactNumber;
     public TableColumn<Object, String> colAddress;
     public TableColumn<Object, Button> colOption;
+    private String searchText = "";
     private final DB_Connection dbcon = new DB_Connection();
 
 
@@ -45,7 +46,12 @@ public class TeacherFormController {
         colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         setCode();
-        setDataIntoTable();
+        setDataIntoTable(searchText);
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = newValue.toLowerCase();
+            setDataIntoTable(searchText);
+        });
 
         tblTeacher.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
@@ -64,26 +70,26 @@ public class TeacherFormController {
     public void saveAndUpdateTeacherOnAction(ActionEvent actionEvent) {
         String code = txtCode.getText();
         String name = txtName.getText();
-        String contactNumbre = txtContactNubmer.getText();
+        String contactNumber = txtContactNubmer.getText();
         String address = txtAddress.getText();
 
         TeacherValidation tv = new TeacherValidation();
 
         if  (tv.nameValidation(name)) {
-            if (tv.contactNumberValidation(contactNumbre)) {
+            if (tv.contactNumberValidation(contactNumber)) {
                 if (tv.addressValidation(address)) {
                     if (btnSaveAndUpdateTeacher.getText().equalsIgnoreCase("save teacher")) {
-                        dbcon.addTeacher(new Teacher(code, name, contactNumbre, address));
+                        dbcon.addTeacher(new Teacher(code, name, contactNumber, address));
                         new Alert(Alert.AlertType.INFORMATION, "Teacher Added Successfully!").show();
 
                     } else {
-                        dbcon.updateTeacherDetails(new Teacher(code, name, contactNumbre, address));
+                        dbcon.updateTeacherDetails(new Teacher(code, name, contactNumber, address));
                         btnSaveAndUpdateTeacher.setText("Save Teacher");
                         new Alert(Alert.AlertType.INFORMATION, "Teacher Details Update Successfully!").show();
                     }
 
                     resetInputBox();
-                    setDataIntoTable();
+                    setDataIntoTable(searchText);
 
                 } else {
                     alertError("Address Incorrect !", "Set Address Correctly",
@@ -113,23 +119,26 @@ public class TeacherFormController {
         btnSaveAndUpdateTeacher.setText("Update Teacher");
     }
 
-    private void setDataIntoTable() {
+    private void setDataIntoTable(String searchText) {
         ObservableList<TeacherTM> obList = FXCollections.observableArrayList();
 
         for (Teacher t : dbcon.getTeacherTable()) {
-            Button btn = new Button("Delete");
-            obList.add(new TeacherTM(t.getCode(), t.getName(), t.getContactNumber(), t.getAddress(), btn));
+            if (t.getName().toLowerCase().contains(searchText)) {
 
-            btn.setOnAction(e->{
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
-                        ButtonType.YES, ButtonType.NO);
-                Optional<ButtonType> buttonType = alert.showAndWait();
-                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
-                    dbcon.deleteTeacher(t);
-                    setDataIntoTable();
-                    new Alert(Alert.AlertType.INFORMATION, "Teacher Delete Successfully").show();
-                }
-            });
+                Button btn = new Button("Delete");
+                obList.add(new TeacherTM(t.getCode(), t.getName(), t.getContactNumber(), t.getAddress(), btn));
+
+                btn.setOnAction(e->{
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                            ButtonType.YES, ButtonType.NO);
+                    Optional<ButtonType> buttonType = alert.showAndWait();
+                    if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                        dbcon.deleteTeacher(t);
+                        setDataIntoTable(searchText);
+                        new Alert(Alert.AlertType.INFORMATION, "Teacher Delete Successfully").show();
+                    }
+                });
+            }
         }
 
         tblTeacher.setItems(obList);
