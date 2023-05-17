@@ -29,10 +29,21 @@ public class TeacherFormController {
     public TableColumn colAddress;
     public TableColumn colOption;
 
+
+    public void initialize() {
+        setCode();
+    }
+
     public void addNewTeacherOnAction(ActionEvent actionEvent) {
     }
 
     public void saveAndUpdateTeacherOnAction(ActionEvent actionEvent) {
+        String code = txtCode.getText();
+        String name = txtName.getText();
+        String contactNumbre = txtContactNubmer.getText();
+        String address = txtAddress.getText();
+
+
     }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
@@ -44,5 +55,20 @@ public class TeacherFormController {
         Stage stage = (Stage) contextTeacherManagement.getScene().getWindow();
         stage.setScene(new Scene(parent));
         stage.centerOnScreen();
+    }
+
+    private void setCode() {
+        String code = txtCode.getText();
+        if (!code.equals("")) {
+            String[] codeArray = code.split("-");
+            String codeNumber = "";
+            for (int i=1;i<codeArray.length;i++) {
+                codeNumber += codeArray[i];
+            }
+            txtCode.setText("T-" + (Integer.parseInt(codeNumber)+1));
+
+        } else {
+            txtCode.setText("T-1");
+        }
     }
 }
