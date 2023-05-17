@@ -33,6 +33,12 @@ public class DB_Connection {
         return selectedUser.filter(user -> pm.checkPassword(password, user.getPassword())).isPresent();
     }
 
+    public boolean checkEmail(String email) {
+        Optional<User> selectedUser = Database.userTable.stream().filter(
+                e->e.getEmail().equals(email)).findFirst();
+        return selectedUser.isPresent();
+    }
+
 
     // Student Operations
     public void addStudent(Student student) {Database.studentTable.add(student);}

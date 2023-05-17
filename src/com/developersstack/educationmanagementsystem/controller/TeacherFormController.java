@@ -161,11 +161,11 @@ public class TeacherFormController {
     private void setCode() {
         if (!dbcon.getLastTeacherCode().equalsIgnoreCase("empty")) {
             String[] codeArray = dbcon.getLastTeacherCode().split("-");
-            String codeNumber = "";
+            StringBuilder codeNumber = new StringBuilder();
             for (int i=1;i<codeArray.length;i++) {
-                codeNumber += codeArray[i];
+                codeNumber.append(codeArray[i]);
             }
-            txtCode.setText("T-" + (Integer.parseInt(codeNumber)+1));
+            txtCode.setText("T-" + (Integer.parseInt(codeNumber.toString())+1));
 
         } else {
             txtCode.setText("T-1");

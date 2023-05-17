@@ -153,11 +153,11 @@ public class StudentFormController {
     private void setStudentID() {
         if (!dbcon.getLastStudentID().equalsIgnoreCase("empty")) {
             String[] idArray = dbcon.getLastStudentID().split("-");
-            String idNumber = "";
+            StringBuilder idNumber = new StringBuilder();
             for (int i=1;i<idArray.length;i++) {
-                idNumber += idArray[i];
+                idNumber.append(idArray[i]);
             }
-            txtStudentID.setText("S-"+(Integer.parseInt(idNumber)+1));
+            txtStudentID.setText("S-"+(Integer.parseInt(idNumber.toString())+1));
 
         } else {
             txtStudentID.setText("S-1");
