@@ -2,6 +2,7 @@ package com.developersstack.educationmanagementsystem.database;
 
 
 import com.developersstack.educationmanagementsystem.model.Student;
+import com.developersstack.educationmanagementsystem.model.Teacher;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
@@ -14,6 +15,8 @@ public class Database {
     public static ArrayList<User> userTable = new ArrayList<>();
     public static ArrayList<Student> studentTable = new ArrayList<>();
 
+    public static ArrayList<Teacher> teachersTable = new ArrayList<>();
+
     static {
 
         PasswordManager pm = new PasswordManager();
@@ -25,5 +28,9 @@ public class Database {
         studentTable.add(new Student("S-1", "Saman", LocalDate.parse("2012-05-08"), "Galle"));
         studentTable.add(new Student("S-2", "Kumara", LocalDate.parse("2012-05-08"), "Panadura"));
         studentTable.add(new Student("S-3", "Selvam", LocalDate.parse("2012-05-08"), "Kaluthara"));
+
+        teachersTable.add(new Teacher("T-1", "Sanduni", "Galle", "+94123456789"));
+        teachersTable.add(new Teacher("T-2", "Saman", "Colombo", "+94123456789"));
+        teachersTable.add(new Teacher("T-3", "Niwarthan", "Panadura", "+94123456789"));
     }
 }

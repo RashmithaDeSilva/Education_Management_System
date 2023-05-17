@@ -55,7 +55,8 @@ public class DashboardFormController {
     public void programsOnAction(ActionEvent actionEvent) {
     }
 
-    public void teachersOnAction(ActionEvent actionEvent) {
+    public void teachersOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("TeacherForm");
     }
 
     public void registrationOnAction(ActionEvent actionEvent) {
