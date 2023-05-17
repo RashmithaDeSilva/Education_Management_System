@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="contaxtTeacherManagement" prefHeight="400.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.educationmanagementsystem.controller.TeacherFormController">
+   <children>
+      <Label layoutX="31.0" layoutY="37.0" text="Teachers Management">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="31.0" layoutY="83.0" prefHeight="4.0" prefWidth="669.0" />
+      <Button layoutX="509.0" layoutY="41.0" mnemonicParsing="false" onAction="#addNewTeacherOnAction" style="-fx-background-color: #0099ff;" text="+ New Teacher" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSaveAndUpdateTeacher" layoutX="551.0" layoutY="138.0" mnemonicParsing="false" onAction="#saveAndUpdateTeacherOnAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #0099ff;" text="Save Teacher" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="64.0" layoutY="116.0" />
+      <TextField fx:id="txtCode" editable="false" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="86.0" promptText="Code">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtName" layoutX="132.0" layoutY="98.0" prefHeight="30.0" prefWidth="149.0" promptText="Full Name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtContactNubmer" layoutX="296.0" layoutY="98.0" prefHeight="30.0" prefWidth="149.0" promptText="Contact Number">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtAddress" layoutX="463.0" layoutY="98.0" prefHeight="25.0" prefWidth="237.0" promptText="Address">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtSearch" layoutX="31.0" layoutY="140.0" prefHeight="25.0" prefWidth="499.0" promptText="Search here">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Button layoutX="640.0" layoutY="41.0" mnemonicParsing="false" onAction="#homeOnAction" style="-fx-background-color: #009900;" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TableView fx:id="tblTeacher" layoutX="34.0" layoutY="186.0" prefHeight="200.0" prefWidth="669.0">
+        <columns>
+          <TableColumn fx:id="colCode" editable="false" prefWidth="92.0" resizable="false" text="# Code" />
+          <TableColumn fx:id="colName" editable="false" prefWidth="145.0" resizable="false" text="Full Name" />
+            <TableColumn fx:id="colContactNumber" editable="false" minWidth="0.0" prefWidth="160.0" resizable="false" text="Contact Number" />
+            <TableColumn fx:id="colAddress" editable="false" minWidth="0.0" prefWidth="175.0" resizable="false" text="Address" />
+            <TableColumn fx:id="colOption" editable="false" minWidth="0.0" prefWidth="96.0" resizable="false" text="Option" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
