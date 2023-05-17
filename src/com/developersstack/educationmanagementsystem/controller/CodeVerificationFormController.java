@@ -22,7 +22,15 @@ public class CodeVerificationFormController {
 
     public void verifyOnAction(ActionEvent actionEvent) throws IOException {
         if (String.valueOf(verifyCode).equals(txtCode.getText())) {
-            setUI("");
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/ResetPasswordForm.fxml"));
+            Parent parent = fxmlLoader.load();
+
+            ResetPasswordFormController controller = fxmlLoader.getController();
+            controller.setUserData(txtSelectedEmail.getText());
+
+            Stage stage = (Stage) contextVerifyForm.getScene().getWindow();
+            stage.setScene(new Scene(parent));
 
         } else {
             new Alert(Alert.AlertType.ERROR, "This Code is Incorrect Try Again !").showAndWait();

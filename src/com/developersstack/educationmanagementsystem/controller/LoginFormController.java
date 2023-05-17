@@ -29,7 +29,7 @@ public class LoginFormController {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
 
-        if (db.checkUserLogingInfomation(email, password)) {
+        if (db.checkUserLoginInformation(email, password)) {
             //System.out.println("Success !");
             setUI("DashboardForm");
             new Alert(Alert.AlertType.INFORMATION, "Login Successfully !").show();

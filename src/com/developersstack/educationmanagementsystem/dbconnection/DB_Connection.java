@@ -16,7 +16,7 @@ public class DB_Connection {
         Database.userTable.add(user);
     }
 
-    public boolean checkUserLogingInfomation(String email, String password) {
+    public boolean checkUserLoginInformation(String email, String password) {
         /*for(User u : Database.userTable) {
             if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
                 //System.out.println(u.toString());
@@ -37,6 +37,12 @@ public class DB_Connection {
         Optional<User> selectedUser = Database.userTable.stream().filter(
                 e->e.getEmail().equals(email)).findFirst();
         return selectedUser.isPresent();
+    }
+
+    public void changePassword(String email, String password) {
+        Optional<User> selectedUser = Database.userTable.stream().filter(
+                e->e.getEmail().equals(email)).findFirst();
+        selectedUser.ifPresent(user -> user.setPassword(new PasswordManager().encode(password)));
     }
 
 
