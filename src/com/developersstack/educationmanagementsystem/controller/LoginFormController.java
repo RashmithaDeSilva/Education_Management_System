@@ -19,12 +19,9 @@ public class LoginFormController {
     public TextField txtEmail;
     public PasswordField txtPassword;
 
-    public void createAccountOnAction(ActionEvent actionEvent) throws IOException {
-        setUI("SignupForm");
-    }
+    public void createAccountOnAction(ActionEvent actionEvent) throws IOException {setUI("SignupForm");}
 
-    public void forgotPasswordOnAction(ActionEvent actionEvent) {
-    }
+    public void forgotPasswordOnAction(ActionEvent actionEvent) throws IOException {setUI("ForgotPasswordForm");}
 
     public void loginOnAction(ActionEvent actionEvent) throws IOException {
         DB_Connection db = new DB_Connection();
