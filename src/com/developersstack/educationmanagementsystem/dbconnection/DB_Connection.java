@@ -37,11 +37,6 @@ public class DB_Connection {
     // Student Operations
     public void addStudent(Student student) {Database.studentTable.add(student);}
 
-    public boolean checkStudentID(String id) {
-        Optional<Student> selectStudent = Database.studentTable.stream().filter(e->e.getId().equals(id)).findFirst();
-        return selectStudent.isPresent();
-    }
-
     public String getLastStudentID() {
         return !Database.studentTable.isEmpty() ?
                 Database.studentTable.get(Database.studentTable.size()-1).getId() : "Empty";
@@ -86,5 +81,9 @@ public class DB_Connection {
             selectedTeacher.get().setContactNumber(teacher.getContactNumber());
             selectedTeacher.get().setAddress(teacher.getAddress());
         }
+    }
+
+    public void deleteTeacher(Teacher t) {
+        Database.teachersTable.remove(t);
     }
 }

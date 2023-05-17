@@ -38,7 +38,4 @@ public class StudentValidation {
         return !address.equals("");
     }
 
-    public boolean idValidation(String id) {
-        return new DB_Connection().checkStudentID(id);
-    }
 }

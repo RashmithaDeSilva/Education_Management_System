@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class TeacherFormController {
     public AnchorPane contextTeacherManagement;
@@ -118,6 +119,17 @@ public class TeacherFormController {
         for (Teacher t : dbcon.getTeacherTable()) {
             Button btn = new Button("Delete");
             obList.add(new TeacherTM(t.getCode(), t.getName(), t.getContactNumber(), t.getAddress(), btn));
+
+            btn.setOnAction(e->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                        ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                    dbcon.deleteTeacher(t);
+                    setDataIntoTable();
+                    new Alert(Alert.AlertType.INFORMATION, "Teacher Delete Successfully").show();
+                }
+            });
         }
 
         tblTeacher.setItems(obList);
