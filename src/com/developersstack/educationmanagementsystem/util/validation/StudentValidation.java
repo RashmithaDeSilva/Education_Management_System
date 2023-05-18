@@ -7,9 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class StudentValidation {
 
-    public boolean nameValidation(String name) {
-        return name.matches("[A-Za-z]+");
-    }
+    public boolean nameValidation(String name) {return name.matches("[A-Za-z]+");}
 
     public boolean DOB_Validation(String dateOfBirth) {
         int MIN_AGE = 10;
@@ -34,8 +32,6 @@ public class StudentValidation {
         }
     }
 
-    public boolean addressValidation(String address) {
-        return !address.equals("");
-    }
+    public boolean addressValidation(String address) {return !address.equals("");}
 
 }

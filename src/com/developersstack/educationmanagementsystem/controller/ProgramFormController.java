@@ -1,6 +1,7 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
+import com.developersstack.educationmanagementsystem.model.Program;
 import com.developersstack.educationmanagementsystem.view.tm.TechAddTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,6 +58,43 @@ public class ProgramFormController {
     public void bachToHomeOnAction(ActionEvent actionEvent) throws IOException {setUI("DashboardForm");}
 
     public void saveAndUpdateOnAction(ActionEvent actionEvent) {
+        try {
+            String code = txtCode.getText();
+            String name = txtName.getText().trim();
+            double cost = Double.parseDouble(txtCost.getText().trim());
+            String teacherID = cmbTeacherID.getSelectionModel().getSelectedItem();
+            String[] technologiesArray = new String[techObList.size()];
+            for (int i=0;i<technologiesArray.length;i++) {
+                technologiesArray[i] = techObList.get(i).getName();
+            }
+
+            if (nameValidation(name)) {
+                if (!txtCost.getText().equals("")) {
+                    if (teacherID != null) {
+                        if (techObList.size() >= 1) {
+
+                            dbcon.addProgram(new Program(code, name, technologiesArray, teacherID, cost));
+                            resetInputBox();
+
+                        } else {
+                            alertError("Technologies Stack Is Empty !", "Add Technologies Correctly",
+                                    "Fill Technologies Stack !");
+                        }
+
+                    } else {
+                        alertError("Teacher ID Incorrect !", "Set Teacher ID Correctly",
+                                "Teacher ID Is Incorrect !");
+                    }
+                }
+            } else {
+                alertError("Program Name Incorrect !", "Set Program Name Correctly",
+                        "Program Name Is Incorrect !");
+            }
+
+        } catch (Exception e) {
+            alertError("Cost Incorrect !", "Set Cost Correctly",
+                    "Cost Is Invalid Value Type !");
+        }
     }
 
     public void txtTechnologiesOnAction(ActionEvent actionEvent) {
@@ -82,6 +120,23 @@ public class ProgramFormController {
         }
     }
 
+    private void resetInputBox() {
+        setCode();
+        txtName.clear();
+        txtCost.clear();
+        techObList.clear();
+    }
+
+    private void alertError(String title, String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.show();
+    }
+
+    public boolean nameValidation(String name) {return name.matches("[A-Za-z]+");}
+
     private boolean isExists(String tech) {
         return techObList.stream().anyMatch(e -> e.getName().toLowerCase().equalsIgnoreCase(tech));
     }
@@ -91,8 +146,8 @@ public class ProgramFormController {
     }
 
     private void setCode() {
-        if (!txtCode.getText().equals("")) {
-            String[] codeArray = txtCode.getText().split("-");
+        if (!dbcon.getLastProgramCode().equalsIgnoreCase("empty")) {
+            String[] codeArray = dbcon.getLastProgramCode().split("-");
             StringBuilder codeNumber = new StringBuilder();
             for (int i=1;i<codeArray.length;i++) {
                 codeNumber.append(codeArray[i]);

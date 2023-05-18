@@ -1,11 +1,13 @@
 package com.developersstack.educationmanagementsystem.dbconnection;
 
 import com.developersstack.educationmanagementsystem.database.Database;
+import com.developersstack.educationmanagementsystem.model.Program;
 import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.model.Teacher;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -109,5 +111,12 @@ public class DB_Connection {
 
 
     // Program Operations
+
+    public String getLastProgramCode() {
+        return !Database.programsTable.isEmpty() ?
+                Database.programsTable.get(Database.programsTable.size()-1).getCode() : "Empty";
+    }
+
+    public void addProgram(Program program) {Database.programsTable.add(program);}
 
 }
