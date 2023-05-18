@@ -1,5 +1,6 @@
 package com.developersstack.educationmanagementsystem.controller;
 
+import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,6 +26,7 @@ public class DashboardFormController {
     public AnchorPane contextDashboard;
     public Label lblDate;
     public Label lblTime;
+    public Label txtUserName;
 
 
     public void initialize() {
@@ -68,4 +70,5 @@ public class DashboardFormController {
         stage.setScene(new Scene(parent));
         stage.centerOnScreen();
     }
+
 }

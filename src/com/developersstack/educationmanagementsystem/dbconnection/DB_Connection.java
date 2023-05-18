@@ -104,7 +104,7 @@ public class DB_Connection {
     public ArrayList<String> getTeacherIDsAndNames() {
         ArrayList<String> teacherArray = new ArrayList<>();
         for (Teacher t : Database.teachersTable) {
-            teacherArray.add(t.getCode() + " - " + t.getName());
+            teacherArray.add(t.getCode() + ". " + t.getName());
         }
         return teacherArray;
     }
@@ -118,5 +118,9 @@ public class DB_Connection {
     }
 
     public void addProgram(Program program) {Database.programsTable.add(program);}
+
+    public ArrayList<Program> getProgramTable() {return Database.programsTable;}
+
+    public void deleteProgram(Program program) {Database.programsTable.remove(program);}
 
 }

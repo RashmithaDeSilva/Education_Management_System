@@ -30,7 +30,16 @@ public class LoginFormController {
         String password = txtPassword.getText();
 
         if (db.checkUserLoginInformation(email, password)) {
-            //System.out.println("Success !");
+
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/DashboardFormForm.fxml"));
+//            Parent parent = fxmlLoader.load();
+//
+//            DashboardFormController controller = fxmlLoader.getController();
+//            controller.setUserData(email);
+//
+//            Stage stage = (Stage) contextLoginForm.getScene().getWindow();
+//            stage.setScene(new Scene(parent));
+
             setUI("DashboardForm");
             new Alert(Alert.AlertType.INFORMATION, "Login Successfully !").show();
 

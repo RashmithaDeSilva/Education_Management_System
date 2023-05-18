@@ -2,6 +2,7 @@ package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.Program;
+import com.developersstack.educationmanagementsystem.view.tm.ProgramTM;
 import com.developersstack.educationmanagementsystem.view.tm.TechAddTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,12 +31,13 @@ public class ProgramFormController {
     public TableColumn<Object, Object> colID;
     public TableColumn<Object, Object> colTechnologies;
     public TableColumn<Object, Object> colRemove;
-    public TableView tblProgram;
+    public TableView<ProgramTM> tblProgram;
     public TableColumn<Object, Object> colCode;
     public TableColumn<Object, Object> colName;
     public TableColumn<Object, Object> colTeachID;
     public TableColumn<Object, Object> colCost;
     public TableColumn<Object, Object> colOption;
+    public TableColumn<Object, Object> colProgramTechnologies;
     private final DB_Connection dbcon = new DB_Connection();
     private final ObservableList<TechAddTM> techObList = FXCollections.observableArrayList();
 
@@ -46,9 +48,16 @@ public class ProgramFormController {
         colTechnologies.setCellValueFactory(new PropertyValueFactory<>("name"));
         colRemove.setCellValueFactory(new PropertyValueFactory<>("button"));
 
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colTeachID.setCellValueFactory(new PropertyValueFactory<>("teacherID"));
+        colTechnologies.setCellValueFactory(new PropertyValueFactory<>("technologies"));
+        colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
+
         setCode();
         setTeacherID();
-
+        loadProgramData();
 
     }
 
@@ -62,7 +71,7 @@ public class ProgramFormController {
             String code = txtCode.getText();
             String name = txtName.getText().trim();
             double cost = Double.parseDouble(txtCost.getText().trim());
-            String teacherID = cmbTeacherID.getSelectionModel().getSelectedItem();
+            String teacherID = cmbTeacherID.getSelectionModel().getSelectedItem().split("\\.")[0];
             String[] technologiesArray = new String[techObList.size()];
             for (int i=0;i<technologiesArray.length;i++) {
                 technologiesArray[i] = techObList.get(i).getName();
@@ -75,6 +84,7 @@ public class ProgramFormController {
 
                             dbcon.addProgram(new Program(code, name, technologiesArray, teacherID, cost));
                             resetInputBox();
+                            loadProgramData();
 
                         } else {
                             alertError("Technologies Stack Is Empty !", "Add Technologies Correctly",
@@ -95,6 +105,28 @@ public class ProgramFormController {
             alertError("Cost Incorrect !", "Set Cost Correctly",
                     "Cost Is Invalid Value Type !");
         }
+    }
+
+    private void loadProgramData() {
+        ObservableList<ProgramTM> programObList = FXCollections.observableArrayList();
+        for (Program p : dbcon.getProgramTable()) {
+            Button btn = new Button("Delete");
+
+            programObList.add(new ProgramTM(p.getCode(), p.getName(), p.getTeacherID(),
+                    p.getTechnologies(), p.getCost(), btn));
+
+            btn.setOnAction(e-> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                        ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                    dbcon.deleteProgram(p);
+                    loadProgramData();
+                    new Alert(Alert.AlertType.INFORMATION, "Program Delete Successfully").show();
+                }
+            });
+        }
+        tblProgram.setItems(programObList);
     }
 
     public void txtTechnologiesOnAction(ActionEvent actionEvent) {
@@ -124,6 +156,7 @@ public class ProgramFormController {
         setCode();
         txtName.clear();
         txtCost.clear();
+        cmbTeacherID.setValue(null);
         techObList.clear();
     }
 

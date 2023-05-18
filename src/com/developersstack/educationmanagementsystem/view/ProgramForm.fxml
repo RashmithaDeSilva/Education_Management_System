@@ -63,7 +63,7 @@
             <TableColumn fx:id="colCode" prefWidth="75.0" resizable="false" text="# Code" />
             <TableColumn fx:id="colName" prefWidth="154.0" resizable="false" text="Name" />
             <TableColumn fx:id="colTeachID" prefWidth="84.0" resizable="false" text="Teacher ID" />
-            <TableColumn fx:id="col" prefWidth="187.0" resizable="false" text="Technologies" />
+            <TableColumn fx:id="colProgramTechnologies" prefWidth="187.0" resizable="false" text="Technologies" />
             <TableColumn fx:id="colCost" prefWidth="94.0" resizable="false" text="Cost" />
             <TableColumn fx:id="colOption" prefWidth="87.0" resizable="false" text="Option" />
          </columns>
