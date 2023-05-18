@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ProgramFormController {
     public AnchorPane contextProgramManagement;
@@ -46,6 +47,8 @@ public class ProgramFormController {
 
         setCode();
         setTeacherID();
+
+
     }
 
     public void addNewProgramOnAction(ActionEvent actionEvent) {
@@ -63,6 +66,16 @@ public class ProgramFormController {
             techObList.add(tm);
             tblTechnologies.setItems(techObList);
             txtTechnologies.clear();
+
+            btn.setOnAction(e -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                        ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                    techObList.remove(tm);
+                    new Alert(Alert.AlertType.INFORMATION, "Technologies Remove Successfully").show();
+                }
+            });
 
         } else {
             new Alert(Alert.AlertType.WARNING, "This Technologies Already Exist").show();
