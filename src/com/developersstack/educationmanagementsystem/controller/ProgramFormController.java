@@ -37,7 +37,7 @@ public class ProgramFormController {
     public TableColumn<Object, Object> colTeachID;
     public TableColumn<Object, Object> colCost;
     public TableColumn<Object, Object> colOption;
-    public TableColumn<Object, Object> colProgramTechnologies;
+    public TableColumn<Object, Object> colProgramTech;
     private final DB_Connection dbcon = new DB_Connection();
     private final ObservableList<TechAddTM> techObList = FXCollections.observableArrayList();
 
@@ -51,7 +51,7 @@ public class ProgramFormController {
         colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colTeachID.setCellValueFactory(new PropertyValueFactory<>("teacherID"));
-        colTechnologies.setCellValueFactory(new PropertyValueFactory<>("technologies"));
+        colProgramTech.setCellValueFactory(new PropertyValueFactory<>("technologies"));
         colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
 
@@ -109,13 +109,16 @@ public class ProgramFormController {
 
     private void loadProgramData() {
         ObservableList<ProgramTM> programObList = FXCollections.observableArrayList();
+
         for (Program p : dbcon.getProgramTable()) {
-            Button btn = new Button("Delete");
+
+            Button btnDelete = new Button("Delete");
+            Button btnShow = new Button("Show");
 
             programObList.add(new ProgramTM(p.getCode(), p.getName(), p.getTeacherID(),
-                    p.getTechnologies(), p.getCost(), btn));
+                    p.getCost(), btnShow, btnDelete));
 
-            btn.setOnAction(e-> {
+            btnDelete.setOnAction(e-> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
                         ButtonType.YES, ButtonType.NO);
                 Optional<ButtonType> buttonType = alert.showAndWait();
@@ -124,6 +127,30 @@ public class ProgramFormController {
                     loadProgramData();
                     new Alert(Alert.AlertType.INFORMATION, "Program Delete Successfully").show();
                 }
+            });
+
+            btnShow.setOnAction(e-> {
+                /*Stage stage = new Stage();
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(
+                            getClass().getResource("../view/TechnologiesForm.fxml")))));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                stage.show();*/
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TechnologiesForm.fxml"));
+                Parent parent = null;
+                try {
+                    parent = fxmlLoader.load();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                TechnologiesFormController controller = fxmlLoader.getController();
+                controller.setUserData(p.getCode());
+
+                Stage stage = new Stage(); //contextVerifyForm.getScene().getWindow();
+                stage.setScene(new Scene(parent));
             });
         }
         tblProgram.setItems(programObList);

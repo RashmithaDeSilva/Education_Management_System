@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="contextTechnologies" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.educationmanagementsystem.controller.TechnologiesFormController">
+   <children>
+      <Label layoutX="76.0" layoutY="32.0" text="Technologies">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="50.0" layoutY="83.0" prefWidth="200.0" />
+      <TableView fx:id="tblPopupTechnologies" layoutX="13.0" layoutY="100.0" prefHeight="239.0" prefWidth="275.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <columns>
+          <TableColumn fx:id="colPopupID" prefWidth="79.0" resizable="false" text="# ID" />
+          <TableColumn fx:id="colPopupTechnologies" prefWidth="200.0" resizable="false" text="Technologies" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
