@@ -1,6 +1,7 @@
 package com.developersstack.educationmanagementsystem.database;
 
 
+import com.developersstack.educationmanagementsystem.model.Program;
 import com.developersstack.educationmanagementsystem.model.Student;
 import com.developersstack.educationmanagementsystem.model.Teacher;
 import com.developersstack.educationmanagementsystem.model.User;
@@ -14,8 +15,8 @@ public class Database {
 
     public static ArrayList<User> userTable = new ArrayList<>();
     public static ArrayList<Student> studentTable = new ArrayList<>();
-
     public static ArrayList<Teacher> teachersTable = new ArrayList<>();
+    public static ArrayList<Program> programsTable = new ArrayList<>();
 
     static {
 

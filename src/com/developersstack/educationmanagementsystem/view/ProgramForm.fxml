@@ -10,56 +10,63 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.educationmanagementsystem.controller.ProgramFormController">
+<AnchorPane fx:id="contextProgramManagement" prefHeight="477.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.educationmanagementsystem.controller.ProgramFormController">
    <children>
       <Label layoutX="28.0" layoutY="39.0" text="Programs Management">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
-      <Button layoutX="508.0" layoutY="42.0" mnemonicParsing="false" text="+ New Program">
+      <Button layoutX="508.0" layoutY="42.0" mnemonicParsing="false" onAction="#addNewProgramOnAction" style="-fx-background-color: #0099ff;" text="+ New Program" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button layoutX="650.0" layoutY="42.0" mnemonicParsing="false" text="Home">
+      <Button layoutX="650.0" layoutY="42.0" mnemonicParsing="false" onAction="#bachToHomeOnAction" style="-fx-background-color: #009900;" text="Home" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button layoutX="570.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Save Program">
+      <Button layoutX="571.0" layoutY="260.0" mnemonicParsing="false" onAction="#saveAndUpdateOnAction" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #0099ff;" text="Save Program" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
       <Separator layoutX="28.0" layoutY="85.0" prefHeight="2.0" prefWidth="682.0" />
-      <TextField editable="false" layoutX="28.0" layoutY="96.0" prefHeight="25.0" prefWidth="89.0" promptText="Code">
+      <TextField fx:id="txtCode" editable="false" layoutX="28.0" layoutY="96.0" prefHeight="25.0" prefWidth="89.0" promptText="Code">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField layoutX="130.0" layoutY="96.0" prefHeight="25.0" prefWidth="161.0" promptText="Name">
+      <TextField fx:id="txtName" layoutX="130.0" layoutY="96.0" prefHeight="25.0" prefWidth="161.0" promptText="Name">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField layoutX="414.0" layoutY="96.0" prefHeight="25.0" prefWidth="99.0" promptText="Cost">
+      <TextField fx:id="txtCost" layoutX="414.0" layoutY="96.0" prefHeight="25.0" prefWidth="99.0" promptText="Cost">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField layoutX="524.0" layoutY="96.0" prefHeight="25.0" prefWidth="185.0" promptText="Technologies">
+      <TextField fx:id="txtTechnologies" layoutX="524.0" layoutY="96.0" prefHeight="25.0" prefWidth="185.0" promptText="Technologies">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <ComboBox layoutX="303.0" layoutY="96.0" prefHeight="30.0" prefWidth="99.0" promptText="Teacher ID" />
-      <TextField layoutX="28.0" layoutY="138.0" prefHeight="25.0" prefWidth="524.0" promptText="Search here">
+      <ComboBox fx:id="cmbTeacherID" layoutX="303.0" layoutY="96.0" prefHeight="30.0" prefWidth="99.0" promptText="Teacher ID" />
+      <TextField fx:id="txtSearch" layoutX="29.0" layoutY="260.0" prefHeight="25.0" prefWidth="524.0" promptText="Search here">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TableView layoutX="28.0" layoutY="178.0" prefHeight="213.0" prefWidth="682.0">
+      <TableView fx:id="tblTechnologies" layoutX="28.0" layoutY="136.0" prefHeight="114.0" prefWidth="682.0">
         <columns>
-          <TableColumn editable="false" prefWidth="75.0" text="# Code" />
-          <TableColumn editable="false" prefWidth="154.0" text="Name" />
-            <TableColumn editable="false" prefWidth="84.0" text="Teacher ID" />
-            <TableColumn editable="false" prefWidth="187.0" text="Technologies" />
-            <TableColumn editable="false" prefWidth="94.0" text="Cost" />
-            <TableColumn editable="false" prefWidth="87.0" text="Option" />
+          <TableColumn fx:id="colID" editable="false" prefWidth="93.0" resizable="false" text="# ID" />
+          <TableColumn fx:id="colTechnologies" editable="false" prefWidth="482.0" resizable="false" text="Technologies" />
+            <TableColumn fx:id="colRemove" editable="false" prefWidth="106.0" resizable="false" text="Remove" />
         </columns>
+      </TableView>
+      <TableView fx:id="tblProgram" layoutX="29.0" layoutY="300.0" prefHeight="164.0" prefWidth="682.0">
+         <columns>
+            <TableColumn fx:id="colCode" editable="false" prefWidth="75.0" resizable="false" text="# Code" />
+            <TableColumn fx:id="colName" editable="false" prefWidth="154.0" resizable="false" text="Name" />
+            <TableColumn fx:id="colTeachID" editable="false" prefWidth="84.0" resizable="false" text="Teacher ID" />
+            <TableColumn fx:id="col" editable="false" prefWidth="187.0" resizable="false" text="Technologies" />
+            <TableColumn fx:id="colCost" editable="false" prefWidth="94.0" resizable="false" text="Cost" />
+            <TableColumn fx:id="colOption" editable="false" prefWidth="87.0" resizable="false" text="Option" />
+         </columns>
       </TableView>
    </children>
 </AnchorPane>
