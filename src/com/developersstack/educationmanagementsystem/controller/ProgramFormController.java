@@ -1,6 +1,8 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +23,7 @@ public class ProgramFormController {
     public TextField txtName;
     public TextField txtCost;
     public TextField txtTechnologies;
-    public ComboBox cmbTeacherID;
+    public ComboBox<String> cmbTeacherID;
     public TextField txtSearch;
     public TableView tblTechnologies;
     public TableColumn colID;
@@ -39,6 +41,7 @@ public class ProgramFormController {
 
     public void initialize() {
         setCode();
+        setTeacherID();
     }
 
     public void addNewProgramOnAction(ActionEvent actionEvent) {
@@ -47,6 +50,13 @@ public class ProgramFormController {
     public void bachToHomeOnAction(ActionEvent actionEvent) throws IOException {setUI("DashboardForm");}
 
     public void saveAndUpdateOnAction(ActionEvent actionEvent) {
+    }
+
+    public void txtTechnologiesOnAction(ActionEvent actionEvent) {
+    }
+
+    private void setTeacherID() {
+        cmbTeacherID.setItems(FXCollections.observableArrayList(dbcon.getTeacherIDsAndNames()));
     }
 
     private void setCode() {

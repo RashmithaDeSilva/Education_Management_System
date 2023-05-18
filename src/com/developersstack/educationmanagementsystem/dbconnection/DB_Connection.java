@@ -99,6 +99,14 @@ public class DB_Connection {
         Database.teachersTable.remove(t);
     }
 
+    public ArrayList<String> getTeacherIDsAndNames() {
+        ArrayList<String> teacherArray = new ArrayList<>();
+        for (Teacher t : Database.teachersTable) {
+            teacherArray.add(t.getCode() + " - " + t.getName());
+        }
+        return teacherArray;
+    }
+
 
     // Program Operations
 
