@@ -1,16 +1,15 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
+import com.developersstack.educationmanagementsystem.view.tm.TechAddTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,21 +24,26 @@ public class ProgramFormController {
     public TextField txtTechnologies;
     public ComboBox<String> cmbTeacherID;
     public TextField txtSearch;
-    public TableView tblTechnologies;
-    public TableColumn colID;
-    public TableColumn colTechnologies;
-    public TableColumn colRemove;
+    public TableView<TechAddTM> tblTechnologies;
+    public TableColumn<Object, Object> colID;
+    public TableColumn<Object, Object> colTechnologies;
+    public TableColumn<Object, Object> colRemove;
     public TableView tblProgram;
-    public TableColumn colCode;
-    public TableColumn colName;
-    public TableColumn colTeachID;
-    public TableColumn col;
-    public TableColumn colCost;
-    public TableColumn colOption;
+    public TableColumn<Object, Object> colCode;
+    public TableColumn<Object, Object> colName;
+    public TableColumn<Object, Object> colTeachID;
+    public TableColumn<Object, Object> colCost;
+    public TableColumn<Object, Object> colOption;
     private final DB_Connection dbcon = new DB_Connection();
+    private final ObservableList<TechAddTM> techObList = FXCollections.observableArrayList();
 
 
     public void initialize() {
+
+        colID.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colTechnologies.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colRemove.setCellValueFactory(new PropertyValueFactory<>("button"));
+
         setCode();
         setTeacherID();
     }
@@ -53,6 +57,20 @@ public class ProgramFormController {
     }
 
     public void txtTechnologiesOnAction(ActionEvent actionEvent) {
+        if (!isExists(txtTechnologies.getText().trim())) {
+            Button btn = new Button("Remove");
+            TechAddTM tm = new TechAddTM((techObList.size()+1), txtTechnologies.getText(), btn);
+            techObList.add(tm);
+            tblTechnologies.setItems(techObList);
+            txtTechnologies.clear();
+
+        } else {
+            new Alert(Alert.AlertType.WARNING, "This Technologies Already Exist").show();
+        }
+    }
+
+    private boolean isExists(String tech) {
+        return techObList.stream().anyMatch(e -> e.getName().toLowerCase().equalsIgnoreCase(tech));
     }
 
     private void setTeacherID() {
