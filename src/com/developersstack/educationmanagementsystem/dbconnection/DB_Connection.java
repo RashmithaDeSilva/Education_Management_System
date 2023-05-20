@@ -123,4 +123,9 @@ public class DB_Connection {
 
     public void deleteProgram(Program program) {Database.programsTable.remove(program);}
 
+    public String[] getTechnologies(String code) {
+        Optional<Program> selectedProgram = Database.programsTable.stream().filter(e->e.getCode().equals(code)).findFirst();
+        return selectedProgram.map(Program::getTechnologies).orElse(null);
+    }
+
 }

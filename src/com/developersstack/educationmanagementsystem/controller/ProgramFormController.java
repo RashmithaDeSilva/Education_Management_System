@@ -83,6 +83,7 @@ public class ProgramFormController {
                         if (techObList.size() >= 1) {
 
                             dbcon.addProgram(new Program(code, name, technologiesArray, teacherID, cost));
+                            new Alert(Alert.AlertType.INFORMATION, "Successfully Added Program !").show();
                             resetInputBox();
                             loadProgramData();
 
@@ -130,27 +131,16 @@ public class ProgramFormController {
             });
 
             btnShow.setOnAction(e-> {
-                /*Stage stage = new Stage();
                 try {
-                    stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(
-                            getClass().getResource("../view/TechnologiesForm.fxml")))));
+                    new TechnologiesFormController().setProgramCode(p.getCode());
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(FXMLLoader.load(Objects
+                            .requireNonNull(getClass().getResource("../view/TechnologiesForm.fxml")))));
+                    stage.show();
+
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-                stage.show();*/
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TechnologiesForm.fxml"));
-                Parent parent = null;
-                try {
-                    parent = fxmlLoader.load();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                TechnologiesFormController controller = fxmlLoader.getController();
-                controller.setUserData(p.getCode());
-
-                Stage stage = new Stage(); //contextVerifyForm.getScene().getWindow();
-                stage.setScene(new Scene(parent));
             });
         }
         tblProgram.setItems(programObList);

@@ -9,12 +9,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.Arrays;
+
 public class TechnologiesFormController {
     public AnchorPane contextTechnologies;
     public TableView<TechPopup> tblPopupTechnologies;
     public TableColumn<Object, Object> colPopupID;
     public TableColumn<Object, Object> colPopupTechnologies;
     private final DB_Connection dbcon = new DB_Connection();
+    private static String programCode;
 
     public void initialize() {
         colPopupID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -22,16 +25,16 @@ public class TechnologiesFormController {
         setDataIntoTable();
     }
 
-    public void setUserData(String code) {
-
+    public void setProgramCode(String code) {
+        programCode = code;
     }
 
     private void setDataIntoTable() {
-//        ObservableList<TechPopup> techPopups = FXCollections.observableArrayList();
-//        for (int i=0;i<dbcon.getProgramTable().size();i++) {
-//            techPopups.add(new TechPopup(String.valueOf(i+1),
-//                    dbcon.getProgramTable().get()));
-//        }
-//        tblPopupTechnologies.setItems(techPopups);
+        ObservableList<TechPopup> techPopups = FXCollections.observableArrayList();
+        String[] techArray = dbcon.getTechnologies(programCode);
+        for (int i=0;i<techArray.length;i++) {
+            techPopups.add(new TechPopup(String.valueOf(i+1), techArray[i]));
+        }
+        tblPopupTechnologies.setItems(techPopups);
     }
 }

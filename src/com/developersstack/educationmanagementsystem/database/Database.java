@@ -33,5 +33,9 @@ public class Database {
         teachersTable.add(new Teacher("T-1", "Sanduni", "+94123456789", "Galle"));
         teachersTable.add(new Teacher("T-2", "Saman", "+94123456789", "Colombo"));
         teachersTable.add(new Teacher("T-3", "Niwarthan", "+94123456789", "Panadura"));
+
+        programsTable.add(new Program("P-1", "CMJD", new String[]{"Java", "PHP", "Python"}, "T-1", 35000));
+        programsTable.add(new Program("P-2", "JDBC", new String[]{"Java", "Python"}, "T-1", 25000));
+        programsTable.add(new Program("P-3", "MASTER", new String[]{"Java"}, "T-1", 15000));
     }
 }
