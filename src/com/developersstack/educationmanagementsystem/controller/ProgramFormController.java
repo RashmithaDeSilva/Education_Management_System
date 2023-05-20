@@ -38,6 +38,7 @@ public class ProgramFormController {
     public TableColumn<Object, Object> colCost;
     public TableColumn<Object, Object> colOption;
     public TableColumn<Object, Object> colProgramTech;
+    private String searchText = "";
     private final DB_Connection dbcon = new DB_Connection();
     private final ObservableList<TechAddTM> techObList = FXCollections.observableArrayList();
 
@@ -57,11 +58,24 @@ public class ProgramFormController {
 
         setCode();
         setTeacherID();
-        loadProgramData();
+        setDataIntoTable(searchText);
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = newValue.toLowerCase();
+            setDataIntoTable(searchText);
+        });
+
+//        tblProgram.getSelectionModel().selectedItemProperty().addListener(
+//                (observable, oldValue, newValue) -> {
+//                    if (null != newValue) {
+//                        setData(newValue);
+//                    }
+//        });
 
     }
 
     public void addNewProgramOnAction(ActionEvent actionEvent) {
+
     }
 
     public void bachToHomeOnAction(ActionEvent actionEvent) throws IOException {setUI("DashboardForm");}
@@ -85,7 +99,7 @@ public class ProgramFormController {
                             dbcon.addProgram(new Program(code, name, technologiesArray, teacherID, cost));
                             new Alert(Alert.AlertType.INFORMATION, "Successfully Added Program !").show();
                             resetInputBox();
-                            loadProgramData();
+                            setDataIntoTable(searchText);
 
                         } else {
                             alertError("Technologies Stack Is Empty !", "Add Technologies Correctly",
@@ -108,40 +122,42 @@ public class ProgramFormController {
         }
     }
 
-    private void loadProgramData() {
+    private void setDataIntoTable(String searchText) {
         ObservableList<ProgramTM> programObList = FXCollections.observableArrayList();
 
         for (Program p : dbcon.getProgramTable()) {
+            if (p.getName().toLowerCase().contains(searchText)) {
 
-            Button btnDelete = new Button("Delete");
-            Button btnShow = new Button("Show");
+                Button btnDelete = new Button("Delete");
+                Button btnShow = new Button("Show");
 
-            programObList.add(new ProgramTM(p.getCode(), p.getName(), p.getTeacherID(),
-                    p.getCost(), btnShow, btnDelete));
+                programObList.add(new ProgramTM(p.getCode(), p.getName(), p.getTeacherID(),
+                        p.getCost(), btnShow, btnDelete));
 
-            btnDelete.setOnAction(e-> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
-                        ButtonType.YES, ButtonType.NO);
-                Optional<ButtonType> buttonType = alert.showAndWait();
-                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
-                    dbcon.deleteProgram(p);
-                    loadProgramData();
-                    new Alert(Alert.AlertType.INFORMATION, "Program Delete Successfully").show();
-                }
-            });
+                btnDelete.setOnAction(e-> {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                            ButtonType.YES, ButtonType.NO);
+                    Optional<ButtonType> buttonType = alert.showAndWait();
+                    if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                        dbcon.deleteProgram(p);
+                        setDataIntoTable(searchText);
+                        new Alert(Alert.AlertType.INFORMATION, "Program Delete Successfully").show();
+                    }
+                });
 
-            btnShow.setOnAction(e-> {
-                try {
-                    new TechnologiesFormController().setProgramCode(p.getCode());
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(FXMLLoader.load(Objects
-                            .requireNonNull(getClass().getResource("../view/TechnologiesForm.fxml")))));
-                    stage.show();
+                btnShow.setOnAction(e-> {
+                    try {
+                        new TechnologiesFormController().setProgramCode(p.getCode());
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(FXMLLoader.load(Objects
+                                .requireNonNull(getClass().getResource("../view/TechnologiesForm.fxml")))));
+                        stage.show();
 
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+            }
         }
         tblProgram.setItems(programObList);
     }

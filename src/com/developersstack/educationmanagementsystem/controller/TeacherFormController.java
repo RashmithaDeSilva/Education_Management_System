@@ -56,7 +56,7 @@ public class TeacherFormController {
         tblTeacher.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (null != newValue) {
-                        setDate(newValue);
+                        setData(newValue);
                     }
         });
 
@@ -111,7 +111,7 @@ public class TeacherFormController {
         setUI("DashboardForm");
     }
 
-    private void setDate(TeacherTM tm) {
+    private void setData(TeacherTM tm) {
         txtCode.setText(tm.getCode());
         txtName.setText(tm.getName());
         txtContactNubmer.setText(tm.getContactNumber());
