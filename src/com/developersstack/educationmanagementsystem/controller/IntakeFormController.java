@@ -1,6 +1,9 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
+import com.developersstack.educationmanagementsystem.model.Program;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +20,7 @@ public class IntakeFormController {
     public TextField txtIntakeID;
     public TextField txtIntakeName;
     public DatePicker txtStartDate;
-    public ComboBox cmbPrograms;
+    public ComboBox<String> cmbPrograms;
     public TextField txtSearch;
     public Button btnSaveAndUpdateIntake;
     public TableView tblIntake;
@@ -31,6 +34,7 @@ public class IntakeFormController {
 
     public void initialize() {
         setIntakeCode();
+        setProgramData();
     }
 
     public void addNewIntakeOnAction(ActionEvent actionEvent) {
@@ -55,6 +59,14 @@ public class IntakeFormController {
         } else {
             txtIntakeID.setText("I-1");
         }
+    }
+
+    private void setProgramData() {
+        ObservableList<String> programNamesAndIDs = FXCollections.observableArrayList();
+        for (Program p : dbcon.getProgramTable()) {
+            programNamesAndIDs.add(p.getCode() + ". " + p.getName());
+        }
+        cmbPrograms.setItems(programNamesAndIDs);
     }
 
     private void setUI(String UI_Name) throws IOException {
