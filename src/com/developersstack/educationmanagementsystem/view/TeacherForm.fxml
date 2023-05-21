@@ -35,7 +35,7 @@
          </cursor>
       </Button>
       <Label layoutX="64.0" layoutY="116.0" />
-      <TextField fx:id="txtCode" editable="false" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="86.0" promptText="Code">
+      <TextField fx:id="txtCode" editable="false" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="86.0" promptText="Code" text="ID">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -70,7 +70,7 @@
       </Button>
       <TableView fx:id="tblTeacher" layoutX="34.0" layoutY="186.0" prefHeight="200.0" prefWidth="669.0">
         <columns>
-          <TableColumn fx:id="colCode" editable="false" prefWidth="92.0" resizable="false" text="# Code" />
+          <TableColumn fx:id="colCode" editable="false" prefWidth="92.0" resizable="false" text="# ID" />
           <TableColumn fx:id="colName" editable="false" prefWidth="145.0" resizable="false" text="Full Name" />
             <TableColumn fx:id="colContactNumber" editable="false" minWidth="0.0" prefWidth="160.0" resizable="false" text="Contact Number" />
             <TableColumn fx:id="colAddress" editable="false" minWidth="0.0" prefWidth="175.0" resizable="false" text="Address" />

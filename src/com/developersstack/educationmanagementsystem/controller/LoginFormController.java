@@ -30,7 +30,7 @@ public class LoginFormController {
         String password = txtPassword.getText();
 
         if (db.checkUserLoginInformation(email, password)) {
-            
+
             new DashboardFormController().setUsername(db.getUserName(email));
             setUI("DashboardForm");
             new Alert(Alert.AlertType.INFORMATION, "Login Successfully !").show();

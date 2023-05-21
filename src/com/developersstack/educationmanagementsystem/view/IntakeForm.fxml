@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.developersstack.educationmanagementsystem.controller.IntakeFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="contextIntake" prefHeight="400.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.developersstack.educationmanagementsystem.controller.IntakeFormController">
+   <children>
+      <Label layoutX="33.0" layoutY="31.0" text="Intake Management">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="33.0" layoutY="79.0" prefHeight="0.0" prefWidth="669.0" />
+      <Button layoutX="514.0" layoutY="33.0" mnemonicParsing="false" onAction="#addNewIntakeOnAction" style="-fx-background-color: #0099ff;" text="+ New Intake" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="641.0" layoutY="33.0" mnemonicParsing="false" onAction="#homeOnAction" style="-fx-background-color: #009900;" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="txtIntakeID" editable="false" layoutX="33.0" layoutY="93.0" prefHeight="30.0" prefWidth="115.0" promptText="Intake Code">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtIntakeName" layoutX="165.0" layoutY="93.0" prefHeight="30.0" prefWidth="184.0" promptText="Intake Name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="txtStartDate" layoutX="364.0" layoutY="93.0" prefHeight="30.0" prefWidth="150.0" promptText="Intake Start Date">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </DatePicker>
+      <ComboBox fx:id="cmbPrograms" layoutX="532.0" layoutY="91.0" prefHeight="30.0" prefWidth="170.0" promptText="Programs">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <TextField fx:id="txtSearch" layoutX="33.0" layoutY="135.0" prefHeight="30.0" prefWidth="520.0" promptText="Search here">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnSaveAndUpdateIntake" layoutX="569.0" layoutY="134.0" mnemonicParsing="false" onAction="#saveAndUpdateOnAction" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: #0099ff;" text="Save Student" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TableView fx:id="tblIntake" layoutX="33.0" layoutY="181.0" prefHeight="207.0" prefWidth="669.0">
+         <columns>
+            <TableColumn fx:id="colID" editable="false" prefWidth="81.0" resizable="false" text="# Code" />
+            <TableColumn fx:id="colName" editable="false" prefWidth="202.0" resizable="false" text="Name" />
+            <TableColumn fx:id="colStartDate" editable="false" prefWidth="123.0" resizable="false" text="Start Date" />
+            <TableColumn fx:id="colProgram" editable="false" prefWidth="167.0" resizable="false" text="Program" />
+            <TableColumn fx:id="colOption" editable="false" prefWidth="95.0" resizable="false" text="Option" />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>
