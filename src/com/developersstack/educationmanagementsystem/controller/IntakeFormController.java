@@ -37,6 +37,7 @@ public class IntakeFormController {
     public TableColumn<Object, Object> colProgram;
     public TableColumn<Object, Object> colOption;
     public TableColumn<Object, Object> colComplete;
+    private String searchText = "";
     private final DB_Connection dbcon = new DB_Connection();
 
 
@@ -51,9 +52,19 @@ public class IntakeFormController {
 
         setIntakeCode();
         setProgramData();
-        setIntakeDate();
+        setIntakeDate(searchText);
 
+        txtSearch.textProperty().addListener(((observable, oldValue, newValue) -> {
+            searchText = newValue.toLowerCase();
+            setIntakeDate(searchText);
+        }));
 
+        tblIntake.getSelectionModel().selectedItemProperty()
+            .addListener(((observable, oldValue, newValue) -> {
+                if (null != newValue) {
+                    //setData(newValue);
+                }
+        }));
     }
 
     public void addNewIntakeOnAction(ActionEvent actionEvent) {
@@ -78,7 +89,7 @@ public class IntakeFormController {
 
                         dbcon.addIntake(new Intake(code, date, name, programID, false));
                         resetInputBox();
-                        setIntakeDate();
+                        setIntakeDate(searchText);
 
                     } else {
                         alertError("Program ID Incorrect !", "Select Program ID Correctly",
@@ -101,25 +112,28 @@ public class IntakeFormController {
         }
     }
 
-    private void setIntakeDate() {
+    private void setIntakeDate(String searchText) {
         ObservableList<IntakeTM> obList = FXCollections.observableArrayList();
 
         for (Intake i : dbcon.getIntakeTable()) {
-            Button btn = new Button("Delete");
-            obList.add(new IntakeTM(i.getIntakeID(), String.valueOf(i.getStartDate()), i.getIntakeName(),
-                    i.getProgramID(), i.isIntakeCompleteness(), btn));
+           if (i.getIntakeName().toLowerCase().contains(searchText)) {
 
-            btn.setOnAction(e-> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
-                        ButtonType.YES, ButtonType.NO);
-                Optional<ButtonType> buttonType = alert.showAndWait();
-                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
-                    dbcon.deleteIntake(i);
-                    setIntakeDate();
-                    new Alert(Alert.AlertType.INFORMATION, "Intake Delete Successfully").show();
-                }
-            });
-            btn.setCursor(Cursor.HAND);
+               Button btn = new Button("Delete");
+               obList.add(new IntakeTM(i.getIntakeID(), String.valueOf(i.getStartDate()), i.getIntakeName(),
+                       i.getProgramID(), i.isIntakeCompleteness(), btn));
+
+               btn.setOnAction(e-> {
+                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                           ButtonType.YES, ButtonType.NO);
+                   Optional<ButtonType> buttonType = alert.showAndWait();
+                   if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                       dbcon.deleteIntake(i);
+                       setIntakeDate(searchText);
+                       new Alert(Alert.AlertType.INFORMATION, "Intake Delete Successfully").show();
+                   }
+               });
+               btn.setCursor(Cursor.HAND);
+           }
         }
         tblIntake.setItems(obList);
     }
