@@ -76,7 +76,8 @@ public class ProgramFormController {
     }
 
     public void addNewProgramOnAction(ActionEvent actionEvent) {
-
+        btnSaveAndUpdate.setText("Save Program");
+        resetInputBox();
     }
 
     public void bachToHomeOnAction(ActionEvent actionEvent) throws IOException {setUI("DashboardForm");}
@@ -104,6 +105,7 @@ public class ProgramFormController {
                             } else {
 
                                 dbcon.updateProgram(new Program(code, name, technologiesArray, teacherID, cost));
+                                btnSaveAndUpdate.setText("Save Program");
                                 new Alert(Alert.AlertType.INFORMATION, "Successfully Update Program !").show();
                             }
 
