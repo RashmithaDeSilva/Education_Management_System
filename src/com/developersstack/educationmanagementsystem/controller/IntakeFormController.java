@@ -4,19 +4,23 @@ import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import com.developersstack.educationmanagementsystem.model.Intake;
 import com.developersstack.educationmanagementsystem.model.Program;
 import com.developersstack.educationmanagementsystem.util.validation.IntakeValidation;
+import com.developersstack.educationmanagementsystem.view.tm.IntakeTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 public class IntakeFormController {
     public AnchorPane contextIntake;
@@ -26,19 +30,28 @@ public class IntakeFormController {
     public ComboBox<String> cmbPrograms;
     public TextField txtSearch;
     public Button btnSaveAndUpdateIntake;
-    public TableView tblIntake;
-    public TableColumn colID;
-    public TableColumn colName;
-    public TableColumn colStartDate;
-    public TableColumn colProgram;
-    public TableColumn colOption;
-    public TableColumn colComplete;
-    private DB_Connection dbcon = new DB_Connection();
+    public TableView<IntakeTM> tblIntake;
+    public TableColumn<Object, Object> colID;
+    public TableColumn<Object, Object> colName;
+    public TableColumn<Object, Object> colStartDate;
+    public TableColumn<Object, Object> colProgram;
+    public TableColumn<Object, Object> colOption;
+    public TableColumn<Object, Object> colComplete;
+    private final DB_Connection dbcon = new DB_Connection();
 
 
     public void initialize() {
+
+        colID.setCellValueFactory(new PropertyValueFactory<>("intakeID"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("intakeName"));
+        colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        colProgram.setCellValueFactory(new PropertyValueFactory<>("programID"));
+        colComplete.setCellValueFactory(new PropertyValueFactory<>("intakeCompleteness"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
+
         setIntakeCode();
         setProgramData();
+        setIntakeDate();
     }
 
     public void addNewIntakeOnAction(ActionEvent actionEvent) {
@@ -63,6 +76,7 @@ public class IntakeFormController {
 
                         dbcon.addIntake(new Intake(code, date, name, programID, false));
                         resetInputBox();
+                        setIntakeDate();
 
                     } else {
                         alertError("Program ID Incorrect !", "Select Program ID Correctly",
@@ -83,6 +97,29 @@ public class IntakeFormController {
             alertError("Program ID Incorrect !", "Select Program ID Correctly",
                     "Selected Program ID Is Incorrect !");
         }
+    }
+
+    private void setIntakeDate() {
+        ObservableList<IntakeTM> obList = FXCollections.observableArrayList();
+
+        for (Intake i : dbcon.getIntakeTable()) {
+            Button btn = new Button("Delete");
+            obList.add(new IntakeTM(i.getIntakeID(), String.valueOf(i.getStartDate()), i.getIntakeName(),
+                    i.getProgramID(), i.isIntakeCompleteness(), btn));
+
+            btn.setOnAction(e-> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
+                        ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                    dbcon.deleteIntake(i);
+                    setIntakeDate();
+                    new Alert(Alert.AlertType.INFORMATION, "Intake Delete Successfully").show();
+                }
+            });
+            btn.setCursor(Cursor.HAND);
+        }
+        tblIntake.setItems(obList);
     }
 
     private void alertError(String title, String headerText, String contentText) {

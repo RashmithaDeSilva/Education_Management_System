@@ -151,4 +151,8 @@ public class DB_Connection {
 
     public void addIntake(Intake intake) {Database.intakesTable.add(intake);}
 
+    public ArrayList<Intake> getIntakeTable() {return Database.intakesTable;}
+
+    public void deleteIntake(Intake intake) {Database.intakesTable.remove(intake);}
+
 }
