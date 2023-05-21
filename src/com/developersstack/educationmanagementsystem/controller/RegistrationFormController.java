@@ -1,6 +1,9 @@
 package com.developersstack.educationmanagementsystem.controller;
 
 import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
+import com.developersstack.educationmanagementsystem.model.Program;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,18 +21,31 @@ public class RegistrationFormController {
     public AnchorPane contextRegistration;
     public TextField txtID;
     public TextField txtName;
-    public ComboBox cmbProgram;
+    public ComboBox<String> cmbProgram;
     public ToggleGroup paidOrNot;
     private final DB_Connection dbcon = new DB_Connection();
 
 
     public void initialize() {
         setRegistrationID();
+        setPrograms();
     }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {setUI("DashboardForm");}
 
     public void registrationOnAction(ActionEvent actionEvent) {
+    }
+
+    private void setStudentNames() {
+            
+    }
+
+    private void setPrograms() {
+        ObservableList<String> programList = FXCollections.observableArrayList();
+        for (Program p : dbcon.getProgramTable()) {
+            programList.add(p.getCode() + ". " + p.getName());
+        }
+        cmbProgram.setItems(programList);
     }
 
     private void setRegistrationID() {
