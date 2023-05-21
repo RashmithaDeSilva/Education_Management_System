@@ -8,9 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -23,6 +21,8 @@ public class RegistrationFormController {
     public TextField txtName;
     public ComboBox<String> cmbProgram;
     public ToggleGroup paidOrNot;
+    public RadioButton rdbPaid;
+    public RadioButton rdbPending;
     private final DB_Connection dbcon = new DB_Connection();
 
 
@@ -34,11 +34,17 @@ public class RegistrationFormController {
     public void homeOnAction(ActionEvent actionEvent) throws IOException {setUI("DashboardForm");}
 
     public void registrationOnAction(ActionEvent actionEvent) {
+        String id = txtID.getText();
+        String studentName = txtName.getText();
+        String program = cmbProgram.getSelectionModel().getSelectedItem();
+        boolean payment = rdbPaid.isSelected();
+
+        
     }
 
-    private void setStudentNames() {
-            
-    }
+//    private void setStudentNames() {
+//
+//    }
 
     private void setPrograms() {
         ObservableList<String> programList = FXCollections.observableArrayList();
