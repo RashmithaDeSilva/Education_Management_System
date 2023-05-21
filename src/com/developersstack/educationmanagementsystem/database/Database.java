@@ -35,5 +35,9 @@ public class Database {
         programsTable.add(new Program("P-1", "CMJD", new String[]{"Java", "PHP", "Python"}, "T-1", 35000));
         programsTable.add(new Program("P-2", "JDBC", new String[]{"Java", "Python"}, "T-1", 25000));
         programsTable.add(new Program("P-3", "MASTER", new String[]{"Java"}, "T-1", 15000));
+
+        intakesTable.add(new Intake("I-1", LocalDate.parse("2024-01-10"), "Jan", "P-2", false));
+        intakesTable.add(new Intake("I-2", LocalDate.parse("2023-06-10"), "June", "P-3", false));
+        intakesTable.add(new Intake("I-3", LocalDate.parse("2023-09-10"), "Sep", "P-1", false));
     }
 }

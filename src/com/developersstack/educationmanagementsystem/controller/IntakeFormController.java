@@ -52,6 +52,8 @@ public class IntakeFormController {
         setIntakeCode();
         setProgramData();
         setIntakeDate();
+
+
     }
 
     public void addNewIntakeOnAction(ActionEvent actionEvent) {
@@ -139,7 +141,7 @@ public class IntakeFormController {
 
     private void setIntakeCode() {
         if (!dbcon.getlastIntakeCode().equalsIgnoreCase("empty")) {
-            String[] intakeCodeArray = txtIntakeID.getText().split("-");
+            String[] intakeCodeArray = dbcon.getlastIntakeCode().split("-");
             StringBuilder intakeNumber = new StringBuilder();
             for (int i=1;i<intakeCodeArray.length;i++) {
                 intakeNumber.append(intakeCodeArray[i]);
