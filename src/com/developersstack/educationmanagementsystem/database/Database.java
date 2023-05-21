@@ -15,6 +15,8 @@ public class Database {
     public static ArrayList<Teacher> teachersTable = new ArrayList<>();
     public static ArrayList<Program> programsTable = new ArrayList<>();
     public static ArrayList<Intake> intakesTable = new ArrayList<>();
+    public static ArrayList<Registration> registrationsTable = new ArrayList<>();
+
 
     static {
 

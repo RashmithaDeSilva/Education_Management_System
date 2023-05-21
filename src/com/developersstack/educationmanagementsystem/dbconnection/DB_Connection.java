@@ -165,4 +165,12 @@ public class DB_Connection {
             selectedIntake.get().setProgramID(intake.getProgramID());
         }
     }
+
+
+    //  Registration
+
+    public String getLastRegistrationID() {
+        return !Database.registrationsTable.isEmpty() ?
+                Database.registrationsTable.get(Database.registrationsTable.size()-1).getId() : "Empty";
+    }
 }

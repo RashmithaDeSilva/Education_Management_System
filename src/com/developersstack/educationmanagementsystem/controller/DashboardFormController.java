@@ -56,8 +56,7 @@ public class DashboardFormController {
 
     public void teachersOnAction(ActionEvent actionEvent) throws IOException {setUI("TeacherForm");}
 
-    public void registrationOnAction(ActionEvent actionEvent) {
-    }
+    public void registrationOnAction(ActionEvent actionEvent) throws IOException {setUI("RegistrationForm");}
 
     public void logoutOnAction(ActionEvent actionEvent) throws IOException {
         setUI("LoginForm");
