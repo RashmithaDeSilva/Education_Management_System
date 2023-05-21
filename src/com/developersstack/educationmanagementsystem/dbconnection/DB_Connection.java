@@ -128,4 +128,14 @@ public class DB_Connection {
         return selectedProgram.map(Program::getTechnologies).orElse(null);
     }
 
+    public void updateProgram(Program program) {
+        Optional<Program> selectedProgram = Database.programsTable.stream().filter(
+                e->e.getCode().equals(program.getCode())).findFirst();
+        if (selectedProgram.isPresent()) {
+            selectedProgram.get().setName(program.getName());
+            selectedProgram.get().setCost(program.getCost());
+            selectedProgram.get().setTeacherID(program.getTeacherID());
+            selectedProgram.get().setTechnologies(program.getTechnologies());
+        }
+    }
 }

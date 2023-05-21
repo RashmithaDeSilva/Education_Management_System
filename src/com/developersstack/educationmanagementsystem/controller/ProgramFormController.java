@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -38,6 +39,7 @@ public class ProgramFormController {
     public TableColumn<Object, Object> colCost;
     public TableColumn<Object, Object> colOption;
     public TableColumn<Object, Object> colProgramTech;
+    public Button btnSaveAndUpdate;
     private String searchText = "";
     private final DB_Connection dbcon = new DB_Connection();
     private final ObservableList<TechAddTM> techObList = FXCollections.observableArrayList();
@@ -65,13 +67,12 @@ public class ProgramFormController {
             setDataIntoTable(searchText);
         });
 
-//        tblProgram.getSelectionModel().selectedItemProperty().addListener(
-//                (observable, oldValue, newValue) -> {
-//                    if (null != newValue) {
-//                        setData(newValue);
-//                    }
-//        });
-
+        tblProgram.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (null != newValue) {
+                        setData(newValue);
+                    }
+        });
     }
 
     public void addNewProgramOnAction(ActionEvent actionEvent) {
@@ -95,9 +96,17 @@ public class ProgramFormController {
                 if (!txtCost.getText().equals("")) {
                     if (teacherID != null) {
                         if (techObList.size() >= 1) {
+                            if (btnSaveAndUpdate.getText().equalsIgnoreCase("save program")) {
 
-                            dbcon.addProgram(new Program(code, name, technologiesArray, teacherID, cost));
-                            new Alert(Alert.AlertType.INFORMATION, "Successfully Added Program !").show();
+                                dbcon.addProgram(new Program(code, name, technologiesArray, teacherID, cost));
+                                new Alert(Alert.AlertType.INFORMATION, "Successfully Added Program !").show();
+
+                            } else {
+
+                                dbcon.updateProgram(new Program(code, name, technologiesArray, teacherID, cost));
+                                new Alert(Alert.AlertType.INFORMATION, "Successfully Update Program !").show();
+                            }
+
                             resetInputBox();
                             setDataIntoTable(searchText);
 
@@ -157,6 +166,9 @@ public class ProgramFormController {
                         throw new RuntimeException(ex);
                     }
                 });
+
+                btnDelete.setCursor(Cursor.HAND);
+                btnShow.setCursor(Cursor.HAND);
             }
         }
         tblProgram.setItems(programObList);
@@ -179,10 +191,41 @@ public class ProgramFormController {
                     new Alert(Alert.AlertType.INFORMATION, "Technologies Remove Successfully").show();
                 }
             });
+            btn.setCursor(Cursor.HAND);
 
         } else {
             new Alert(Alert.AlertType.WARNING, "This Technologies Already Exist").show();
         }
+    }
+
+    private void setData(ProgramTM tm) {
+
+        techObList.clear();
+
+        for (int i=0;i<dbcon.getTechnologies(tm.getCode()).length;i++) {
+
+            Button btn = new Button("Remove");
+            TechAddTM addTM = new TechAddTM((i+1), dbcon.getTechnologies(tm.getCode())[i], btn);
+            techObList.add(addTM);
+
+            btn.setOnAction(e -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                        "Are you sure?", ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.isPresent() && buttonType.get().equals(ButtonType.YES)) {
+                    techObList.remove(addTM);
+                    new Alert(Alert.AlertType.INFORMATION, "Technologies Remove Successfully").show();
+                }
+            });
+            btn.setCursor(Cursor.HAND);
+        }
+
+        txtCode.setText(tm.getCode());
+        txtName.setText(tm.getName());
+        txtCost.setText(String.valueOf(tm.getCost()));
+        cmbTeacherID.setValue(tm.getTeacherID());
+        tblTechnologies.setItems(techObList);
+        btnSaveAndUpdate.setText("Update Program");
     }
 
     private void resetInputBox() {

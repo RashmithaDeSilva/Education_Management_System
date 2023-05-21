@@ -22,11 +22,17 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnSaveAndUpdateTeacher" layoutX="551.0" layoutY="138.0" mnemonicParsing="false" onAction="#saveAndUpdateTeacherOnAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #0099ff;" text="Save Teacher" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Label layoutX="64.0" layoutY="116.0" />
       <TextField fx:id="txtCode" editable="false" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="86.0" promptText="Code">

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -19,15 +20,24 @@
       <Button layoutX="508.0" layoutY="42.0" mnemonicParsing="false" onAction="#addNewProgramOnAction" style="-fx-background-color: #0099ff;" text="+ New Program" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button layoutX="650.0" layoutY="42.0" mnemonicParsing="false" onAction="#bachToHomeOnAction" style="-fx-background-color: #009900;" text="Home" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></Button>
-      <Button layoutX="571.0" layoutY="323.0" mnemonicParsing="false" onAction="#saveAndUpdateOnAction" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #0099ff;" text="Save Program" textFill="WHITE">
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnSaveAndUpdate" layoutX="571.0" layoutY="323.0" mnemonicParsing="false" onAction="#saveAndUpdateOnAction" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #0099ff;" text="Save Program" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Separator layoutX="28.0" layoutY="85.0" prefHeight="2.0" prefWidth="682.0" />
       <TextField fx:id="txtCode" editable="false" layoutX="28.0" layoutY="96.0" prefHeight="30.0" prefWidth="97.0" promptText="Code">
          <font>
@@ -45,7 +55,10 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <ComboBox fx:id="cmbTeacherID" layoutX="485.0" layoutY="96.0" prefHeight="30.0" prefWidth="225.0" promptText="Teacher" />
+      <ComboBox fx:id="cmbTeacherID" layoutX="485.0" layoutY="96.0" prefHeight="30.0" prefWidth="225.0" promptText="Teacher">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
       <TextField fx:id="txtSearch" layoutX="29.0" layoutY="323.0" prefHeight="25.0" prefWidth="524.0" promptText="Search here">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -57,6 +70,9 @@
           <TableColumn fx:id="colTechnologies" prefWidth="482.0" resizable="false" text="Technologies" />
             <TableColumn fx:id="colRemove" prefWidth="106.0" resizable="false" text="Remove" />
         </columns>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </TableView>
       <TableView fx:id="tblProgram" editable="true" layoutX="29.0" layoutY="363.0" prefHeight="164.0" prefWidth="682.0">
          <columns>
