@@ -1,5 +1,4 @@
 # Education Management System
-***
 
 + Here is an Education Management System and here a user can perform many functions including resetting the password through email and also a student, teacher, program, and intake management system.
 + This application is created using Java FX.
