@@ -127,9 +127,13 @@ public class ProgramFormController {
                         "Program Name Is Incorrect !");
             }
 
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             alertError("Cost Incorrect !", "Set Cost Correctly",
                     "Cost Is Invalid Value Type !");
+
+        } catch (Exception e) {
+            alertError("Teacher ID Incorrect !", "Set Teacher ID Correctly",
+                    "Teacher ID Is Incorrect !");
         }
     }
 

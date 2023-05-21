@@ -1,10 +1,7 @@
 package com.developersstack.educationmanagementsystem.dbconnection;
 
 import com.developersstack.educationmanagementsystem.database.Database;
-import com.developersstack.educationmanagementsystem.model.Program;
-import com.developersstack.educationmanagementsystem.model.Student;
-import com.developersstack.educationmanagementsystem.model.Teacher;
-import com.developersstack.educationmanagementsystem.model.User;
+import com.developersstack.educationmanagementsystem.model.*;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
 import java.util.ArrayList;
@@ -151,4 +148,7 @@ public class DB_Connection {
         return  !Database.intakesTable.isEmpty() ?
                 Database.intakesTable.get(Database.intakesTable.size()-1).getIntakeID() : "Empty";
     }
+
+    public void addIntake(Intake intake) {Database.intakesTable.add(intake);}
+
 }
