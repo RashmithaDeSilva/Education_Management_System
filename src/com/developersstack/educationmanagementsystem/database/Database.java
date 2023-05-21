@@ -1,10 +1,7 @@
 package com.developersstack.educationmanagementsystem.database;
 
 
-import com.developersstack.educationmanagementsystem.model.Program;
-import com.developersstack.educationmanagementsystem.model.Student;
-import com.developersstack.educationmanagementsystem.model.Teacher;
-import com.developersstack.educationmanagementsystem.model.User;
+import com.developersstack.educationmanagementsystem.model.*;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
 import java.time.LocalDate;
@@ -17,6 +14,7 @@ public class Database {
     public static ArrayList<Student> studentTable = new ArrayList<>();
     public static ArrayList<Teacher> teachersTable = new ArrayList<>();
     public static ArrayList<Program> programsTable = new ArrayList<>();
+    public static ArrayList<Intake> intakesTable = new ArrayList<>();
 
     static {
 

@@ -147,4 +147,8 @@ public class DB_Connection {
 
     // Intake Operations
 
+    public String getlastIntakeCode() {
+        return  !Database.intakesTable.isEmpty() ?
+                Database.intakesTable.get(Database.intakesTable.size()-1).getIntakeID() : "Empty";
+    }
 }
