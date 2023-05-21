@@ -62,12 +62,14 @@ public class IntakeFormController {
         tblIntake.getSelectionModel().selectedItemProperty()
             .addListener(((observable, oldValue, newValue) -> {
                 if (null != newValue) {
-                    //setData(newValue);
+                    setData(newValue);
                 }
         }));
     }
 
     public void addNewIntakeOnAction(ActionEvent actionEvent) {
+        btnSaveAndUpdateIntake.setText("Save Intake");
+        resetInputBox();
     }
 
     public void homeOnAction(ActionEvent actionEvent) throws IOException {
@@ -86,8 +88,16 @@ public class IntakeFormController {
             if (iv.nameValidation(name)) {
                 if (iv.startDateValidation(String.valueOf(date))) {
                     if (!programID.equals(cmbPrograms.getPromptText())) {
+                       if (!btnSaveAndUpdateIntake.getText().equalsIgnoreCase("update intake")) {
 
-                        dbcon.addIntake(new Intake(code, date, name, programID, false));
+                           dbcon.addIntake(new Intake(code, date, name, programID, false));
+                           new Alert(Alert.AlertType.INFORMATION, "Intake Added Successfully!").show();
+
+                       } else {
+
+                           dbcon.updateIntake(new Intake(code, date, name, programID, false));
+                           new Alert(Alert.AlertType.INFORMATION, "Intake Update Successfully!").show();
+                       }
                         resetInputBox();
                         setIntakeDate(searchText);
 
@@ -110,6 +120,14 @@ public class IntakeFormController {
             alertError("Program ID Incorrect !", "Select Program ID Correctly",
                     "Selected Program ID Is Incorrect !");
         }
+    }
+
+    private void setData(IntakeTM newValue) {
+        txtIntakeID.setText(newValue.getIntakeID());
+        txtIntakeName.setText(newValue.getIntakeName());
+        txtStartDate.setValue(LocalDate.parse(newValue.getStartDate()));
+        cmbPrograms.setValue(newValue.getProgramID());
+        btnSaveAndUpdateIntake.setText("Update Intake");
     }
 
     private void setIntakeDate(String searchText) {

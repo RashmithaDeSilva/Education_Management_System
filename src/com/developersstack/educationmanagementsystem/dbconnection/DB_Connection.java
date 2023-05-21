@@ -3,6 +3,7 @@ package com.developersstack.educationmanagementsystem.dbconnection;
 import com.developersstack.educationmanagementsystem.database.Database;
 import com.developersstack.educationmanagementsystem.model.*;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -155,4 +156,13 @@ public class DB_Connection {
 
     public void deleteIntake(Intake intake) {Database.intakesTable.remove(intake);}
 
+    public void updateIntake(Intake intake) {
+        Optional<Intake> selectedIntake = Database.intakesTable.stream().filter(
+                e->e.getIntakeID().equals(intake.getIntakeID())).findFirst();
+        if (selectedIntake.isPresent()) {
+            selectedIntake.get().setIntakeName(intake.getIntakeName());
+            selectedIntake.get().setStartDate(intake.getStartDate());
+            selectedIntake.get().setProgramID(intake.getProgramID());
+        }
+    }
 }
