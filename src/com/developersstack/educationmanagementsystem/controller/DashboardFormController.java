@@ -1,6 +1,5 @@
 package com.developersstack.educationmanagementsystem.controller;
 
-import com.developersstack.educationmanagementsystem.dbconnection.DB_Connection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -27,9 +26,11 @@ public class DashboardFormController {
     public Label lblDate;
     public Label lblTime;
     public Label txtUserName;
+    private static String userName = "User name";
 
 
     public void initialize() {
+        txtUserName.setText(userName);
         setDate();
         setTime();
     }
@@ -49,8 +50,7 @@ public class DashboardFormController {
 
     public void studentOnAction(ActionEvent actionEvent) throws IOException {setUI("StudentForm");}
 
-    public void intakesOnA(ActionEvent actionEvent) {
-    }
+    public void intakesOnA(ActionEvent actionEvent) throws IOException {setUI("IntakeForm");}
 
     public void programsOnAction(ActionEvent actionEvent) throws IOException {setUI("ProgramForm");}
 
@@ -70,5 +70,7 @@ public class DashboardFormController {
         stage.setScene(new Scene(parent));
         stage.centerOnScreen();
     }
+
+    public void setUsername(String userName) {DashboardFormController.userName = userName;}
 
 }

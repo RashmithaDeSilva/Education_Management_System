@@ -83,5 +83,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="txtUserName" layoutX="33.0" layoutY="17.0" prefHeight="17.0" prefWidth="184.0" text="User Name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

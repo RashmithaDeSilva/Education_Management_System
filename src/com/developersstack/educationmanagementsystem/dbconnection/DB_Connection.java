@@ -7,7 +7,6 @@ import com.developersstack.educationmanagementsystem.model.Teacher;
 import com.developersstack.educationmanagementsystem.model.User;
 import com.developersstack.educationmanagementsystem.util.security.PasswordManager;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -45,6 +44,12 @@ public class DB_Connection {
         Optional<User> selectedUser = Database.userTable.stream().filter(
                 e->e.getEmail().equals(email)).findFirst();
         selectedUser.ifPresent(user -> user.setPassword(new PasswordManager().encode(password)));
+    }
+
+    public String getUserName(String email) {
+        Optional<User> selectedUser = Database.userTable.stream().filter(
+                e->e.getEmail().equals(email)).findFirst();
+        return selectedUser.map(user -> user.getFirstName() + " " + user.getLastName()).orElse("empty");
     }
 
 
